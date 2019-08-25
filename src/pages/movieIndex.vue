@@ -28,6 +28,7 @@
     <el-container>
         <el-main>
             <el-button><a href="#/detail">详情页面</a></el-button>
+            <el-button><a href="#/login">登录页面</a></el-button>
         </el-main>
     </el-container>
     </div>
