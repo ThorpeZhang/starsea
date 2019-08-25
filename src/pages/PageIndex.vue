@@ -8,7 +8,7 @@
     </el-container>
     <el-container>
         <el-main><page-card></page-card></el-main>
-        <el-aside width="30%">
+        <el-aside width="26%">
             <div><page-search></page-search></div>
         </el-aside>
     </el-container>
