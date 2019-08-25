@@ -1,18 +1,21 @@
 <template>
 	<div id="header-bar">
-		<el-row>
-			<el-col :span="24">
-				<ul>
-			<li v-for="(item, index) in items" v-bind:key="item">
-				<a v-bind:class="{ active: item.isActive }"
-					v-bind:href="['#/'+item.name]"
-					v-on:click="navClickEvent(items,index)">
-					{{item.text}}
-				</a>
-			</li>
-		</ul>
-			</el-col>
-		</el-row>
+		<el-menu :default-active="activeIndex"
+		 class="el-menu-demo"
+		  mode="horizontal"
+		   @select="handleSelect"
+		   active-text-color="#4CAF50"
+		   background-color="#545c64"
+  			text-color="#fff"
+		   >
+			<el-menu-item index="1"><a href="#/">星海</a></el-menu-item>
+			<el-menu-item index="2"><a href="#/movie">影视</a></el-menu-item>
+			<el-menu-item index="3"><a href="#/book">图书</a></el-menu-item>
+			<el-menu-item index="4"><a href="#/group">小组</a></el-menu-item>
+			<el-button round>登录</el-button>
+			<el-button round>注册</el-button>
+			<el-button icon="el-icon-search" circle></el-button>
+		</el-menu>
 	</div>
 </template>
 
@@ -20,83 +23,39 @@
 import pageSearch from './pageSearch.vue'
 export default {
 	name: 'pageHeader',
-	data:function() {
-		return {
-			items:[
-				{
-					text: '星海',
-					isActive: true,
-					name: ''
-				},
-				{
-					text: '影视',
-					isActive: false,
-					name: 'movie'
-				},
-				{
-					text: '图书',
-					isActive: false,
-					name: 'book'
-				},
-				{
-					text: '小组',
-					isActive: false,
-					name: 'group'
-				}
-			]
-		}
-	},
-	methods: {
-		navClickEvent: function(items,index){
-			items.forEach(function(el){
-				el.isActive=false;
-			});
-			items[index].isActive=true;
-			this.$emit('navClickEvent',items,index);
-		}
-	},
+	data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    },
 	components: {
 		'page-search': pageSearch
 	}
 }
 </script>
 <style scoped>
+@import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
+.el-button{
+	float:right;
+	align-self: center;
+	position:relative;
+	top:10px;
+}
 #header-bar {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 }
-ul {
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-	overflow: hidden;
-	border: 1px solid #E9EEF3;
-	background-color: #E9EEF3;
-	/*
-    border: 1px solid #e7e7e7;
-	background-color: #f3f3f3;
-	*/
-	
-}
-li {
+a {
 	float: left;
-}
-li a {
-    display: block;
-    color: #666;
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #ddd;
-}
-
-li a.active {
-    color: white;
-    background-color: #4CAF50;
+	font-size: 100%;
 }
 </style>
