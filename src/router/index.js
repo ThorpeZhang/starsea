@@ -7,6 +7,7 @@ import pageGroup from '../pages/PageGroup.vue'
 
 import movieIndex from '../pages/movieIndex.vue'
 import movieDetail from '../pages/movieDetail.vue'
+import pageLogin from '../pages/PageLogin.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/group',
       name: 'group',
       component: pageGroup
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: pageLogin
     }
   ]
 })
