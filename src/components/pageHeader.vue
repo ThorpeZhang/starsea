@@ -12,9 +12,12 @@
 			<el-menu-item index="2"><a href="#/movie">影视</a></el-menu-item>
 			<el-menu-item index="3"><a href="#/book">图书</a></el-menu-item>
 			<el-menu-item index="4"><a href="#/group">小组</a></el-menu-item>
-			<el-button round>登录</el-button>
-			<el-button round>注册</el-button>
-			<el-button icon="el-icon-search" circle></el-button>
+			
+            <a href="#/login"><el-button round>登录</el-button></a>
+            <a href='#/register'><el-button round>注册</el-button></a>
+			
+			
+			<a><el-button icon="el-icon-search" circle></el-button></a>
 		</el-menu>
 	</div>
 </template>
@@ -41,7 +44,7 @@ export default {
 </script>
 <style scoped>
 @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
-.el-button{
+a .el-button{
 	float:right;
 	align-self: center;
 	position:relative;
@@ -54,7 +57,6 @@ export default {
 	width: 100%;
 }
 a {
-	float: left;
     text-decoration: none;
 	font-size: 100%;
 }
