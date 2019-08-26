@@ -4,7 +4,7 @@
     <el-card :body-style="{ padding: '0px' }" shadow="hover">
       <a :href="link">
         <img
-          src="../assets/ci8.jpg"
+          src="@/assets/ci8.jpg"
           class="image"
         /></a>
       <!--<a :href="link">

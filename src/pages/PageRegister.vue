@@ -54,6 +54,7 @@
       onSubmit(formName) {
         // 为表单绑定验证功能
         // this.$alert('正在登录!')
+        //this.$alert('准备发送数据')
         this.$axios
             .post('/register', {
                 username: this.form.username,
@@ -70,6 +71,7 @@
                 }
             })
             .catch(failResponse => {})
+            //alert('数据处理完毕')
       }
     }
   }

@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import pageSearch from "../components/pageSearch.vue";
-import pageCard from "../components/pageCard.vue";
-import pageStar from "../components/pageStar.vue";
-import pageShowStar from "../components/pageShowStar.vue";
-import pagePlayCard from "../components/pagePlayCard.vue";
-import pageGroupItem from "../components/pageGroupItem.vue";
+import pageHeader from "@/components/pageHeader.vue";
+import pageSearch from "@/components/pageSearch.vue";
+import pageCard from "@/components/pageCard.vue";
+import pageStar from "@/components/pageStar.vue";
+import pageShowStar from "@/components/pageShowStar.vue";
+import pagePlayCard from "@/components/pagePlayCard.vue";
+import pageGroupItem from "@/components/pageGroupItem.vue";
 
 export default {
   name: "PageGroup",

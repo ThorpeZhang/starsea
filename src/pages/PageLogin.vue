@@ -59,7 +59,7 @@
         //this.$store.commit('login','ztt',true)
         // 为表单绑定验证功能
          //this.$alert(this.$store.state.userAccount.username)
-         //this.$alert('logining')
+         //this.$alert('准备发送数据')
          //this.$router.replace({path:'/'});
 
         this.$axios
@@ -79,6 +79,8 @@
                 }
             })
             .catch(failResponse => {})
+        
+        //alert('数据处理完毕')
       }
     }
   }

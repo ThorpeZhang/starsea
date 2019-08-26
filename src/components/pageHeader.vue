@@ -41,7 +41,7 @@
 
 <script>
 import pageSearch from './pageSearch.vue'
-import store from '../store'
+import store from '@/store'
 
 
 export default {

@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import pageHeader from '../components/pageHeader.vue'
-import pageSearch from '../components/pageSearch.vue'
-import pageCard from '../components/pageCard.vue'
-import pageStar from '../components/pageStar.vue'
-import pageShowStar from '../components/pageShowStar.vue'
-import pagePlayCard from '../components/pagePlayCard.vue'
-import pageDetail from '../components/pageDetail.vue'
+import pageHeader from '@/components/pageHeader.vue'
+import pageSearch from '@/components/pageSearch.vue'
+import pageCard from '@/components/pageCard.vue'
+import pageStar from '@/components/pageStar.vue'
+import pageShowStar from '@/components/pageShowStar.vue'
+import pagePlayCard from '@/components/pagePlayCard.vue'
+import pageDetail from '@/components/pageDetail.vue'
 export default {
   name: 'MovieDetail',
   components: {
