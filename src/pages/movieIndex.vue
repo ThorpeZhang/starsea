@@ -27,8 +27,7 @@
     </el-container>
     <el-container>
         <el-main>
-            <el-button><a href="#/detail">详情页面</a></el-button>
-            <el-button><a href="#/login">登录页面</a></el-button>
+          <a href="#/detail"><el-button>详情页面</el-button></a>  
         </el-main>
     </el-container>
     </div>
@@ -58,7 +57,7 @@ export default {
 #movieIndex {
     width: 100%;
     position: absolute;
-    top: 50px;
+    top: 60px;
     left: 0;
 }
   .el-header, .el-footer {

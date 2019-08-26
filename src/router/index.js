@@ -8,6 +8,7 @@ import pageGroup from '../pages/PageGroup.vue'
 import movieIndex from '../pages/movieIndex.vue'
 import movieDetail from '../pages/movieDetail.vue'
 import pageLogin from '../pages/PageLogin.vue'
+import pageRegister from '../pages/PageRegister.vue'
 
 Vue.use(Router)
 
@@ -21,17 +22,14 @@ export default new Router({
     {
       path: '/movie',
       name: 'movie',
+      meta: {
+        requireAuth: true,
+      },
       component: pageMovie,
-      children: [
-        {
-          path: '/',
-          component: movieIndex
-        },
-        {
-          path: '/detail',
-          component: movieDetail
-        }
-      ]
+    },
+    {
+      path: '/movieDetail',
+      component: movieDetail
     },
     {
       path: '/book',
@@ -47,6 +45,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: pageLogin
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: pageRegister
     }
   ]
 })

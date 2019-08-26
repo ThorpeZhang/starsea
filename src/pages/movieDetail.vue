@@ -32,7 +32,7 @@ export default {
 #movieDetail {
     width: 100%;
     position: absolute;
-    top: 50px;
+    top: 60px;
     left: 0;
 }
   .el-header, .el-footer {

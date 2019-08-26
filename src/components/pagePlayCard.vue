@@ -1,10 +1,37 @@
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
-      <h3 class="medium">{{ item }}</h3>
+      <!--<h3 class="medium">{{ item }}test</h3>-->
+      <!--<img src="../assets/play1.jpg"/>-->
+      <a :href="link">
+      <el-image
+        style="width: 100%; height: 100%"
+        :src="url"
+        :fit="scale-down"></el-image>
+      </a>
     </el-carousel-item>
   </el-carousel>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      item: 'test',
+      /*url: [
+        '../assets/play1.jpg',
+        '../assets/play2.jpg',
+        '../assets/play3.jpg',
+        '../assets/play4.jpg',
+        '../assets/play5.jpg',
+        '../assets/play6.jpg'
+      ]*/
+      url: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+      link:"#/movieDetail",
+    }
+  }
+}
+</script>
 
 <style>
   .el-carousel__item h3 {

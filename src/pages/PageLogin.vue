@@ -26,7 +26,10 @@
   </div>
 </template>
 
+
 <script>
+//import store from '../store.js'
+
   export default {
     name: "PageLogin",
     data() {
@@ -50,10 +53,15 @@
         dialogVisible: false
       }
     },
+    //store,
     methods: {
       onSubmit(formName) {
+        //this.$store.commit('login','ztt',true)
         // 为表单绑定验证功能
-        // this.$alert('正在登录!')
+         //this.$alert(this.$store.state.userAccount.username)
+         //this.$alert('logining')
+         //this.$router.replace({path:'/'});
+
         this.$axios
             .post('/login', {
                 username: this.form.username,
@@ -62,10 +70,12 @@
             .then(successResponse =>{
                 this.responseResult = JSON.stringify(successResponse.data)
                 if(successResponse.data.code === 200) {
-                    this.$router.replace({path:'/'})
+                    this.$store.commit('login',this.form.username)
+                    this.$router.replace({path:'/'});
+
                 }
                 else{
-                    this.$alert(successResponse.data.message)
+                    alert(successResponse.data.message)
                 }
             })
             .catch(failResponse => {})
