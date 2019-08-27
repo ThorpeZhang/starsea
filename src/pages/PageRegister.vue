@@ -67,7 +67,7 @@
                     this.$router.replace({path:'/'})
                 }
                 else{
-                    $alert(successResponse.data.message)
+                    alert(successResponse.data.message)
                 }
             })
             .catch(failResponse => {})
