@@ -19,7 +19,8 @@
 			<el-menu-item v-for="(item,i) in navList"
 				:key="i"
 				:index="item.name">
-				<a v-bind:href="[item.name]">{{item.navItem}}</a>
+				<!--<a v-bind:href="'#'+[item.name]">{{item.navItem}}</a>-->
+				{{item.navItem}}
 			</el-menu-item>
 
 			
@@ -49,10 +50,10 @@ export default {
 	data() {
       return {
         navList: [
-			{name: '#/' ,  navItem:'星海'},
-			{name: '#/movie' ,  navItem:'影视'},
-			{name: '#/book' ,  navItem:'图书'},
-			{name: '#/group' ,  navItem:'小组'}
+			{name: '/' ,  navItem:'星海'},
+			{name: '/movie' ,  navItem:'影视'},
+			{name: '/book' ,  navItem:'图书'},
+			{name: '/group' ,  navItem:'小组'}
 		]
       };
 	},
