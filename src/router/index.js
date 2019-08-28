@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import pageIndex from '@/pages/PageIndex.vue'
-import pageMovie from '@/pages/PageMovie.vue'
-import pageBook from '@/pages/PageBook.vue'
 import pageGroup from '@/pages/PageGroup.vue'
+
+import bookIndex from '@/pages/bookIndex.vue'
+import bookDetail from '@/pages/bookDetail.vue'
 
 import movieIndex from '@/pages/movieIndex.vue'
 import movieDetail from '@/pages/movieDetail.vue'
+
 import pageLogin from '@/pages/PageLogin.vue'
 import pageRegister from '@/pages/PageRegister.vue'
 
@@ -24,21 +26,25 @@ export default new Router({
       component: pageIndex
     },
     {
-      path: '/movie',
-      name: 'movie',
+      path: '/movieIndex',
+      name: 'movieIndex',
       meta: {
         requireAuth: true,
       },
-      component: pageMovie,
+      component: movieIndex,
     },
     {
       path: '/movieDetail/:title',
       component: movieDetail
     },
     {
-      path: '/book',
-      name: 'book',
-      component: pageBook
+      path: '/bookIndex',
+      name: 'bookIndex',
+      component: bookIndex
+    },
+    {
+      path: '/bookDetail/:title',
+      component: bookDetail
     },
     {
       path: '/group',

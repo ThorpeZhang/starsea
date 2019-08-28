@@ -51,8 +51,8 @@ export default {
       return {
         navList: [
 			{name: '/' ,  navItem:'星海'},
-			{name: '/movie' ,  navItem:'影视'},
-			{name: '/book' ,  navItem:'图书'},
+			{name: '/movieIndex' ,  navItem:'影视'},
+			{name: '/bookIndex' ,  navItem:'图书'},
 			{name: '/group' ,  navItem:'小组'}
 		]
       };

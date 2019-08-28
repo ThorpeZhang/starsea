@@ -1,8 +1,8 @@
 <template>
     <el-row>
-  <el-col :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 1 : 2">
+  <el-col :span="4" v-for="(o, index) in 4"  :key="o" :offset="index > 0 ? 1 : 2">
     <el-card :body-style="{ padding: '0px' }" shadow="hover">
-      <a :href="'#/movieDetail/'+items[index].title">
+      <a :href="'#/'+type+'Detail/'+items[index].title">
       <!--<a :href="link">-->
         <img
           :src="items[index].imgsrc"
@@ -34,7 +34,8 @@ export default {
       'page-showstar': pageShowStar
   },
   props: {
-    items:Array
+    items:Array,
+    type:String,
   }
 }
 </script>

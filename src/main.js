@@ -61,27 +61,3 @@ router.beforeEach((to,from,next)=>{
     return next();
   }
 })
-
-/*router.beforeEach((to,from,next) => {
-  
-  if(to.meta.requireAuth===true){
-    if(window.sessionStorage.getItem('flag')==='true'){
-      this.$store.commit('login',window.sessionStorage.getItem('username'));
-      next();
-    }
-    else{
-      if(to.name==='login'){
-        next();
-        return;
-      }
-      next({
-        path:'/login'
-      });
-    }
-  }
-  else{
-    alert('auth为false')
-    next();
-  }
-})*/
-

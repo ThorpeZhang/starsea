@@ -7,10 +7,10 @@
         
     </el-container>
     <el-container>
-        <el-main><page-card :items="info.movies"></page-card></el-main>
+        <el-main><page-card :items="info.movies" type="movie"></page-card></el-main>
     </el-container>
     <el-container>
-        <el-main><page-card :items="info.books"></page-card></el-main>
+        <el-main><page-card :items="info.books" type="book"></page-card></el-main>
     </el-container>
     </div>
 </template>

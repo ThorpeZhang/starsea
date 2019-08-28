@@ -1,13 +1,13 @@
 <template>
     <div id="movieIndex">
-      <page-card :items="info.line1" type="movie"></page-card>
+      <page-card :items="info.line1" type="book"></page-card>
     </div>
 </template>
 
 <script>
 import pageCard from '@/components/pageCard.vue'
 export default {
-  name: 'movieIndex',
+  name: 'bookIndex',
   components: {
     'page-card': pageCard,
   },
@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     this.$axios
-            .get('/showMovieIndex', {
+            .get('/showBookIndex', {
                 params: {
                     num: '4',
                 }

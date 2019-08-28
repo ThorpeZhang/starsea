@@ -25,20 +25,6 @@ export default {
   data() {
     return {
       currentDate: new Date(),
-      /*
-      info :{
-        title: '保持沉默',
-        mark: 3.9,
-        items: [
-          {name: '导演', value:'周可'},
-          {name: '主演', value:'周迅 / 吴镇宇 / 祖峰 / 孙睿'},
-          {name: '类型', value:'剧情 / 爱情 / 悬疑'},
-          {name: '制片国家/地区', value:'中国大陆'},
-          {name: '语言', value:'汉语普通话'},
-          {name: '上映日期', value:'2019-08-23(中国大陆)'},
-          {name: '片长', value:'96分钟'},
-        ]
-      }*/
     };
   },
   components: {
@@ -48,7 +34,8 @@ export default {
       'info-card': infoCard,
   },
   props:{
-    info: Object
+    info: Object,
+    type:String
   }
 }
 </script>

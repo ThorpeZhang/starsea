@@ -1,7 +1,7 @@
 <template>
-    <div id="movieDetail">
+    <div id="bookDetail">
     <el-container>
-        <page-detail :info="info.data" type="movie"></page-detail>
+        <page-detail :info="info.data" type="book"></page-detail>
     </el-container>
     </div>
 </template>
@@ -10,10 +10,10 @@
 import pageCard from '@/components/pageCard.vue'
 import pageDetail from '@/components/pageDetail.vue'
 export default {
-  name: 'MovieDetail',
+  name: 'bookDetail',
   components: {
     'page-card': pageCard,
-    'page-detail': pageDetail
+    'page-detail': pageDetail,
   },
   data() {
     return {
@@ -23,30 +23,13 @@ export default {
   mounted() {
     var title=this.$route.params.title
     this.$axios
-            .get('/showMovie', {
+            .get('/showBook', {
                 params: {
                   name:title
-                    //name: "寄生虫"
                 }
             })
             .then(successResponse => {
-                this.$set(this.info,"data",this.movieDataProcess(successResponse))
-              /*
-                
-                this.$set(this.info,"title",successResponse.data.name);
-                this.$set(this.info,"mark",successResponse.data.score);
-                this.$set(this.info,"imgsrc",successResponse.data.imgAddr)
-                var _items=[
-                    {name: '导演', value:successResponse.data.director},
-                    {name: '主演', value:successResponse.data.stars},
-                    {name: '类型', value:successResponse.data.types},
-                    {name: '制片国家/地区', value:successResponse.data.region},
-                    {name: '语言', value:successResponse.data.language},
-                    {name: '上映日期', value:successResponse.data.releaseYear},
-                  ];
-                  this.$set(this.info,"items",_items);
-                  */
-                
+                this.$set(this.info,"data",this.bookDataProcess(successResponse))          
             })
             .catch(failResponse => {
             })
@@ -55,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-#movieDetail {
+#bookDetail {
     width: 100%;
     position: absolute;
     top: 60px;
