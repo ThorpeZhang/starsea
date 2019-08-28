@@ -53,9 +53,10 @@
             <page-card :items="info.books" type="book"></page-card>
           </el-main>
         </el-container>
+        
         </el-container>
 
-        
+
       </el-main>
       <el-aside width="35%"></el-aside>
     </el-container>

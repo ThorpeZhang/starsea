@@ -59,6 +59,12 @@ p{
 .item-name h1{
     display: inline;
     font-size: 40px;
+
+    -webkit-line-clamp: 1;
+    display: -webkit-box inline;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 .item-title h1{
     text-align: left;
