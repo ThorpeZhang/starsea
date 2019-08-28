@@ -18,15 +18,6 @@
                     <p v-for="item in info.items" :key="item">
                         {{item.name}}: {{item.value}}
                     </p>
-
-                    <!--
-                    <p>导演：{{director}}</p>
-                    <p>主演：{{actors}}</p>
-                    <p>类型：{{movie.type}}</p>
-                    <p>制片国家/地区：{{region}}</p>
-                    <p>语言：{{movie.language}}</p>
-                    <p>上映时间：{{movie.releaseYear}}</p>
-                    -->
                 </div>
             </div>
         </div>
@@ -48,22 +39,21 @@ export default {
 
 <style scoped>
 div{
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+}
+p{
+    margin: 2px;
+    line-height: 27px;
 }
 .info-card{
     height: 300px;
     width: 650px;
 }
-.item-title{
-    width: 100%;
-    height: 15%;
-    text-align: left;
-}
 .item-name{
     float: right;
     width:68%;
-    height: 20%;
+    height: 18%;
     text-align: left;
 }
 .item-name h1{
@@ -115,7 +105,7 @@ div{
     font-size: 100%;
     color: orange;
     float:right;
-    height: 12%;
+    height: 17%;
     width: 100%;
     float:left;
 }

@@ -20,7 +20,7 @@ export default {
     this.$axios
             .get('/showMovieIndex', {
                 params: {
-                    num: '4',
+                    num: '5',
                 }
             })
             .then(successResponse => {

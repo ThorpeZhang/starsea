@@ -41,7 +41,7 @@ export default {
                 {name: '语言', value:successResponse.data.language},
                 {name: '出版国家/地区', value:successResponse.data.region},
                 {name: '类型', value:successResponse.data.bookTypes},
-                {name: '定价', value:successResponse.data.price},
+                //{name: '定价', value:successResponse.data.price},
                 {name: 'ISBN', value:successResponse.data.isbn},
             ]
         }

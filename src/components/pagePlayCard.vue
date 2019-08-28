@@ -6,7 +6,7 @@
       <!--<a :href="link">-->
       <a :href="'#/movieDetail/'+items[item].title">
       <el-image
-        style="width: 100%; height: 100%"
+        style="height: 100%"
         :src="items[item].imgsrc"
         ></el-image>
       </a>

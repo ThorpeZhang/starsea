@@ -8,6 +8,8 @@ import bookDetail from '@/pages/bookDetail.vue'
 
 import movieIndex from '@/pages/movieIndex.vue'
 import movieDetail from '@/pages/movieDetail.vue'
+import tvDetail from '@/pages/tvDetail.vue'
+
 
 import pageLogin from '@/pages/PageLogin.vue'
 import pageRegister from '@/pages/PageRegister.vue'
@@ -36,6 +38,10 @@ export default new Router({
     {
       path: '/movieDetail/:title',
       component: movieDetail
+    },
+    {
+      path: '/TVDetail/:title',
+      component: tvDetail
     },
     {
       path: '/bookIndex',

@@ -3,14 +3,61 @@
         <el-container>
         <el-main>
             <page-playcard :items="info.movies"></page-playcard>
-        </el-main>
+        </el-main>   
+    </el-container>
+    
+    <el-container>
+      <el-main width="65%">
+        <el-container>
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="20" :offset="4">
+                <h1>热门电影</h1>
+                <hr/>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <page-card :items="info.movies" type="movie"></page-card>
+            <page-card :items="info.movies" type="movie"></page-card>
+          </el-main>
+        </el-container>
+
+
+        <el-container>
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="20" :offset="4">
+                <h1>热门好剧</h1>
+                <hr/>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <page-card :items="info.TV" type="TV"></page-card>
+            <page-card :items="info.TV" type="TV"></page-card>
+          </el-main>
+
+
+        <el-container>
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="20" :offset="4">
+                <h1>热门图书</h1>
+                <hr/>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <page-card :items="info.books" type="book"></page-card>
+            <page-card :items="info.books" type="book"></page-card>
+          </el-main>
+        </el-container>
+        </el-container>
+
         
-    </el-container>
-    <el-container>
-        <el-main><page-card :items="info.movies" type="movie"></page-card></el-main>
-    </el-container>
-    <el-container>
-        <el-main><page-card :items="info.books" type="book"></page-card></el-main>
+      </el-main>
+      <el-aside width="35%"></el-aside>
     </el-container>
     </div>
 </template>
@@ -41,7 +88,7 @@ export default {
     this.$axios
             .get('/showMovieIndex', {
                 params: {
-                    num: '4',
+                    num: '5',
                 }
             })
             .then(successResponse => {
@@ -53,11 +100,23 @@ export default {
     this.$axios
             .get('/showBookIndex', {
                 params: {
-                    num: '4',
+                    num: '5',
                 }
             })
             .then(successResponse => {
               this.$set(this.info,"books",this.bookDataListProcess(successResponse));
+            })
+            .catch(failResponse => {
+            });
+
+    this.$axios
+            .get('/showTVIndex', {
+                params: {
+                    num: '5',
+                }
+            })
+            .then(successResponse => {
+              this.$set(this.info,"TV",this.movieDataListProcess(successResponse));
             })
             .catch(failResponse => {
             });
@@ -66,6 +125,10 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  font-size: 25px;
+  margin: 0;
+}
 #APP-index {
     width: 100%;
     position: absolute;
@@ -73,10 +136,11 @@ export default {
     left: 0;
 }
   .el-header, .el-footer {
-    background-color: #B3C0D1;
+    /*background-color: #B3C0D1;*/
+    background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 60px;
+    text-align: left;
+    line-height: 30px;
   }
   
   .el-aside {
