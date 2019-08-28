@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import pageHeader from "@/components/pageHeader.vue";
-import pageSearch from "@/components/pageSearch.vue";
-import pageCard from "@/components/pageCard.vue";
-import pageStar from "@/components/pageStar.vue";
-import pageShowStar from "@/components/pageShowStar.vue";
-import pagePlayCard from "@/components/pagePlayCard.vue";
-import pageGroupItem from "@/components/pageGroupItem.vue";
+import pageHeader from "../components/pageHeader.vue";
+import pageSearch from "../components/pageSearch.vue";
+import pageCard from "../components/pageCard.vue";
+import pageStar from "../components/pageStar.vue";
+import pageShowStar from "../components/pageShowStar.vue";
+import pagePlayCard from "../components/pagePlayCard.vue";
+import pageGroupItem from "../components/pageGroupItem.vue";
 
 export default {
   name: "PageGroup",
@@ -40,7 +40,7 @@ export default {
 #APP-Group {
   width: 100%;
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 0;
 }
 .el-header,

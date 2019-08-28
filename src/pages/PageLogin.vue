@@ -68,7 +68,7 @@
                 password: this.form.password
             })
             .then(successResponse =>{
-                this.responseResult = JSON.stringify(successResponse.data)
+                //this.responseResult = JSON.stringify(successResponse.data)
                 if(successResponse.data.code === 200) {
                     this.$store.commit('login',this.form.username)
                     this.$router.replace({path:'/'});

@@ -10,6 +10,10 @@ import movieDetail from '@/pages/movieDetail.vue'
 import pageLogin from '@/pages/PageLogin.vue'
 import pageRegister from '@/pages/PageRegister.vue'
 
+import groupDetail from '@/pages/groupDetail.vue'
+
+import mainSearchPage from "../pages/mainSearchPage";
+
 Vue.use(Router)
 
 export default new Router({
@@ -28,7 +32,7 @@ export default new Router({
       component: pageMovie,
     },
     {
-      path: '/movieDetail',
+      path: '/movieDetail/:title',
       component: movieDetail
     },
     {
@@ -50,6 +54,16 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: pageRegister
+    },
+    {
+      path: '/groupDetail',
+      name: 'groupDetail',
+      component: groupDetail
+    },
+    {
+      path: '/mainSearchPage',
+      name: mainSearchPage,
+      component: mainSearchPage
     }
   ]
 })

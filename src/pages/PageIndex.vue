@@ -2,15 +2,12 @@
     <div id="APP-index">
         <el-container>
         <el-main>
-            <page-playcard></page-playcard>
+            <page-playcard :items="infos"></page-playcard>
         </el-main>
         
     </el-container>
     <el-container>
-        <el-main><page-card></page-card></el-main>
-        <el-aside width="26%">
-            <div><page-search></page-search></div>
-        </el-aside>
+        <el-main><page-card :items="infos"></page-card></el-main>
     </el-container>
     </div>
 </template>
@@ -24,6 +21,19 @@ import pageShowStar from '@/components/pageShowStar.vue'
 import pagePlayCard from '@/components/pagePlayCard.vue'
 export default {
   name: 'PageIndex',
+  data(){
+    return {
+      info:{},
+      infos:[{},{},{},{}],
+      introduction:"123123",
+      tests:{
+          title: '保持沉默',
+          mark: 3.9,
+          imgsrc: 'http://114.115.131.124:8666/image/movie/寄生虫.jpg',
+          introduction:'123123123123123123123'
+        },
+    }
+  },
   components: {
     'page-header': pageHeader,
     'page-search': pageSearch,
@@ -31,7 +41,32 @@ export default {
     'page-star': pageStar,
     'page-showstar': pageShowStar,
     'page-playcard': pagePlayCard
-  }
+  },
+  mounted() {
+    this.$axios
+            .get('/showMovie', {
+                params: {
+                    name: '流浪地球',
+                }
+            })
+            .then(successResponse => {
+                
+                this.$set(this.info,"title",successResponse.data.name);
+                this.$set(this.info,"mark",successResponse.data.score);
+                this.$set(this.info,"imgsrc",successResponse.data.imgAddr);
+                this.$set(this.info,"introduction",successResponse.data.introduction)
+
+                this.$set(this.infos[0],"data",this.info);
+                this.$set(this.infos[1],"data",this.info);
+                this.$set(this.infos[2],"data",info);
+                this.$set(this.infos[3],"data",info);
+
+                //alert(this.infos[0].data.title);
+                
+            })
+            .catch(failResponse => {
+            })
+  },
 }
 </script>
 

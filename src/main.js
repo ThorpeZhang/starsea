@@ -10,6 +10,7 @@ import store from './store.js'
 
 var axios = require('axios')
 axios.defaults.baseURL='http://114.115.131.124:8666/api'
+//axios.defaults.baseURL='http://localhost:8666/api'
 
 Vue.prototype.$axios=axios
 

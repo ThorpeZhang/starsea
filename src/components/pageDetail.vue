@@ -4,50 +4,56 @@
   <!--
     现在的问题是 左右屏幕不会滚动
   -->
-  <el-row>
-    <el-container style="width: 100%;" class="content">
-      <el-header>
-        <div class="title">
-          <h1>
-            <span align="left">寄生虫</span>
-            <span>(2019)</span>
-          </h1>
-        </div>
-      </el-header>
-      <el-main>
-        <el-col :span="6" push="4" class="left">
-          <div class="imagePaper">
-            <img src="../assets/ci8.jpg" class="movieLogo">
-          </div>
-        </el-col>
-        <el-col :span="8" push="4" class="right">
-          <div class="mark"> 评分：4.0<page-showstar value=4.0></page-showstar></div>
-          <br>
-          <div class="more-info">
-            <div>导演：奉俊昊</div>
-            <div>主演：宋康昊 / 李善均 / 赵汝贞 / 崔宇植 / 朴素丹 / 张慧珍 / 玄升玟 / 郑贤俊 / 朴叙俊 / 李静恩</div>
-            <div>类型：剧情 / 喜剧</div>
-            <div>制片国家/地区：韩国</div>
-            <div>语言：韩语</div>
-            <div>上映时间：2019-05-21</div>
-            <div>片长：132分钟</div>
-          </div>
-        </el-col>
-      </el-main>
-    </el-container>
-    <div class="description">
-        <h1>剧情简介</h1>
-        <p>《寄生虫》讲述了发生在身份地位悬殊的两个家庭身上的故事：宋康昊饰演的无业游民父亲基泽，让寄托了家人生计希望的大儿子（崔宇植 饰）前往IT公司老总朴社长（李善均 饰）家应聘课外教师，随之发生了一连串意外事件。</p>
-    </div>
-    <div class="comment">
-      <h1>影视评论</h1>
-      <p>很好看</p>
-    </div>
-  </el-row>
+  <div>
+    <el-row>
+      <el-col :span="10" :offset="6">
+        <info-card :info="info"></info-card>
+      </el-col>
+    </el-row>
+  </div>
+    
+      
 </template>
 
-<style scoped>
+<script>
+import pageShowStar from "./pageShowStar.vue"
+import writecomment from "./comment.vue"
+import commentBox from "./commentBox"
+import infoCard from "./infoCard.vue"
+export default {
+  name: 'pageDetail',
+  data() {
+    return {
+      currentDate: new Date(),
+      /*
+      info :{
+        title: '保持沉默',
+        mark: 3.9,
+        items: [
+          {name: '导演', value:'周可'},
+          {name: '主演', value:'周迅 / 吴镇宇 / 祖峰 / 孙睿'},
+          {name: '类型', value:'剧情 / 爱情 / 悬疑'},
+          {name: '制片国家/地区', value:'中国大陆'},
+          {name: '语言', value:'汉语普通话'},
+          {name: '上映日期', value:'2019-08-23(中国大陆)'},
+          {name: '片长', value:'96分钟'},
+        ]
+      }*/
+    };
+  },
+  components: {
+      'page-showstar': pageShowStar,
+      'write-comment': writecomment,
+      'comment-box':commentBox,
+      'info-card': infoCard,
+  },
+  props:{
+    info: Object
+  }
+}
+</script>
 
+<style scoped>
   template {
     overflow: hidden;
     min-width:1500px;
@@ -55,11 +61,7 @@
   .content {
     width: 100%;
   }
-  .left {
-
-  }
   .right {
-
     text-align: left;
     font-size: 20px;
     border-top: 100px;
@@ -72,22 +74,29 @@
   }
   .imagePaper {
     margin-left: 0%;
-    margin-top: 15px;
+    margin-top: 15px;/*
     width: 300px;
-    height: 400px;
+    height: 400px;*/
     overflow: hidden;
     position: relative;
   }
-  .movieLogo {
-    height: 100%;
-    overflow: hidden;
+  .imagePaper img {
+    width:100%;
+    height:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+			/*为了效果明显，可以将如下边框打开，看一下效果*/
+			/* border:1px solid black; */
   }
   .mark {
     font-size: 30px;
     color: orange;
+    padding-top: 10px;
   }
   .more-info {
     line-height: 40px;
+    padding-top: 10px;
   }
   .description {
     text-align: left;
@@ -97,19 +106,9 @@
     text-align: left;
     margin: 20px 15% 50px;
   }
-</style>
-
-<script>
-import pageShowStar from "./pageShowStar.vue"
-export default {
-  name: 'pageDetail',
-  data() {
-    return {
-      currentDate: new Date()
-    };
-  },
-  components: {
-      'page-showstar': pageShowStar
+  .writeComment {
+    text-align: left;
+    margin: 20px 15% 50px;
   }
-}
-</script>
+
+</style>

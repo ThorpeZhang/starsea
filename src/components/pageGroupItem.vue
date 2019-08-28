@@ -4,6 +4,7 @@
       <el-timeline-item  timestamp="2018/4/12" placement="top">
         <el-card>         
             <h4>{{title}}</h4>
+            <span><a :href="zuming">小组名</a></span>
             <p>{{ message }}</p>  
         </el-card>
         <dianzan></dianzan>
@@ -28,10 +29,11 @@ import zan from "./zan.vue";
 export default {
   el: "#detail_block",
   components: {
-    dianzan: zan
+    "dianzan": zan
   },
   data: function() {
     return {
+      zuming:"#/groupDetail",
       title: "这是默认标题",
       message: "这是默认内容"
     };
