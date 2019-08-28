@@ -1,13 +1,14 @@
 <template>
   <el-carousel :interval="4000" type="card" height="300px">
-    <el-carousel-item v-for="item in 6" :key="item">
+    <el-carousel-item  v-for="(o, item) in 4" :key="o">
       <!--<h3 class="medium">{{ item }}test</h3>-->
       <!--<img src="../assets/play1.jpg"/>-->
-      <a :href="link">
+      <!--<a :href="link">-->
+      <a :href="'#/movieDetail/'+items[item].title">
       <el-image
         style="width: 100%; height: 100%"
-        :src="items[0].data.imgsrc"
-        :fit="scale-down"></el-image>
+        :src="items[item].imgsrc"
+        ></el-image>
       </a>
     </el-carousel-item>
   </el-carousel>

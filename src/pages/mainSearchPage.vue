@@ -20,7 +20,7 @@
         </div>
       </el-col>
       <el-col :span="18" push="2">
-        <div class="mainBlock" v-for="item in items">
+        <div class="mainBlock" v-for="item in items" :key="item">
           <search-movie-detail></search-movie-detail>
         </div>
       </el-col>
@@ -52,7 +52,7 @@
             mainSearchInput: '',
             item: searchMovieDetail,
           }
-        }
+        },
     }
 </script>
 

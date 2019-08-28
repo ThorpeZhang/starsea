@@ -1,7 +1,7 @@
 <template>
     <div id="movieDetail">
     <el-container>
-        <page-detail :info="info"></page-detail>
+        <page-detail :info="info.data"></page-detail>
     </el-container>
     </div>
 </template>
@@ -40,6 +40,8 @@ export default {
                 }
             })
             .then(successResponse => {
+                this.$set(this.info,"data",this.movieDataProcess(successResponse))
+              /*
                 
                 this.$set(this.info,"title",successResponse.data.name);
                 this.$set(this.info,"mark",successResponse.data.score);
@@ -53,6 +55,7 @@ export default {
                     {name: '上映日期', value:successResponse.data.releaseYear},
                   ];
                   this.$set(this.info,"items",_items);
+                  */
                 
             })
             .catch(failResponse => {

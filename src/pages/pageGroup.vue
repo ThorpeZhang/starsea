@@ -40,7 +40,7 @@ export default {
 #APP-Group {
   width: 100%;
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 0;
 }
 .el-header,

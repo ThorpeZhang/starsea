@@ -35,7 +35,7 @@
 
 			
 			
-			<a><el-button @click="search" icon="el-icon-search" circle></el-button></a>
+			<a href='#/mainSearchPage'><el-button icon="el-icon-search" circle></el-button></a>
 		</el-menu>
 	</div>
 </template>
@@ -73,6 +73,7 @@ export default {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
 	  },
+	  /*
 	  search() {
       this.$prompt("搜索", {
         confirmButtonText: "搜索",
@@ -93,7 +94,7 @@ export default {
             message: "取消"
           });
         });
-    }
+      }*/
     },
 	components: {
 		'page-search': pageSearch

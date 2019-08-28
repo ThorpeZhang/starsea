@@ -2,12 +2,15 @@
     <div id="APP-index">
         <el-container>
         <el-main>
-            <page-playcard :items="infos"></page-playcard>
+            <page-playcard :items="info.movies"></page-playcard>
         </el-main>
         
     </el-container>
     <el-container>
-        <el-main><page-card :items="infos"></page-card></el-main>
+        <el-main><page-card :items="info.movies"></page-card></el-main>
+    </el-container>
+    <el-container>
+        <el-main><page-card :items="info.books"></page-card></el-main>
     </el-container>
     </div>
 </template>
@@ -24,14 +27,6 @@ export default {
   data(){
     return {
       info:{},
-      infos:[{},{},{},{}],
-      introduction:"123123",
-      tests:{
-          title: '保持沉默',
-          mark: 3.9,
-          imgsrc: 'http://114.115.131.124:8666/image/movie/寄生虫.jpg',
-          introduction:'123123123123123123123'
-        },
     }
   },
   components: {
@@ -44,28 +39,28 @@ export default {
   },
   mounted() {
     this.$axios
-            .get('/showMovie', {
+            .get('/showMovieIndex', {
                 params: {
-                    name: '流浪地球',
+                    num: '4',
                 }
             })
             .then(successResponse => {
-                
-                this.$set(this.info,"title",successResponse.data.name);
-                this.$set(this.info,"mark",successResponse.data.score);
-                this.$set(this.info,"imgsrc",successResponse.data.imgAddr);
-                this.$set(this.info,"introduction",successResponse.data.introduction)
-
-                this.$set(this.infos[0],"data",this.info);
-                this.$set(this.infos[1],"data",this.info);
-                this.$set(this.infos[2],"data",info);
-                this.$set(this.infos[3],"data",info);
-
-                //alert(this.infos[0].data.title);
-                
+              this.$set(this.info,"movies",this.movieDataListProcess(successResponse));
             })
             .catch(failResponse => {
+            });
+            
+    this.$axios
+            .get('/showBookIndex', {
+                params: {
+                    num: '4',
+                }
             })
+            .then(successResponse => {
+              this.$set(this.info,"books",this.bookDataListProcess(successResponse));
+            })
+            .catch(failResponse => {
+            });
   },
 }
 </script>

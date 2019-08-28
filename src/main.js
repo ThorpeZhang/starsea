@@ -7,17 +7,23 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueAxios from 'vue-axios'
 import store from './store.js'
+import dataProcess from './dataProcess/index'
 
 var axios = require('axios')
 axios.defaults.baseURL='http://114.115.131.124:8666/api'
 //axios.defaults.baseURL='http://localhost:8666/api'
 
 Vue.prototype.$axios=axios
-
+Vue.prototype.movieDataProcess=dataProcess.movieDataProcess
+Vue.prototype.movieDataListProcess=dataProcess.movieDataListProcess
+Vue.prototype.bookDataProcess=dataProcess.bookDataProcess
+Vue.prototype.bookDataListProcess=dataProcess.bookDataListProcess
 
 Vue.use(VueAxios)
 
 Vue.use(ElementUI)
+
+Vue.use(dataProcess)
 
 Vue.config.productionTip = false
 
