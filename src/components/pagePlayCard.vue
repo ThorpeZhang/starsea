@@ -1,15 +1,16 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="300px">
-    <el-carousel-item  v-for="(o, item) in 4" :key="o">
+  <el-carousel :interval="4000" type="card" height="300px" width="100px">
+    <el-carousel-item  v-for="(o, item) in 4" :key="o"><h1>广告位招租</h1>
       <!--<h3 class="medium">{{ item }}test</h3>-->
       <!--<img src="../assets/play1.jpg"/>-->
       <!--<a :href="link">-->
+        <!--
       <a :href="'#/movieDetail/'+items[item].title">
       <el-image
         style="height: 100%"
         :src="items[item].imgsrc"
         ></el-image>
-      </a>
+      </a>-->
     </el-carousel-item>
   </el-carousel>
 </template>

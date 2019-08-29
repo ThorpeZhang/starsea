@@ -15,6 +15,7 @@ import pageLogin from '@/pages/PageLogin.vue'
 import pageRegister from '@/pages/PageRegister.vue'
 
 import groupDetail from '@/pages/groupDetail.vue'
+import tieziDetail from '../pages/tieziDetail.vue'
 
 import mainSearchPage from "../pages/mainSearchPage";
 
@@ -76,6 +77,11 @@ export default new Router({
       path: '/mainSearchPage',
       name: mainSearchPage,
       component: mainSearchPage
+    },
+    {
+      path:'/tieziDetail',
+      name:'tieziDetail',
+      component:tieziDetail
     }
   ]
 })

@@ -18,6 +18,8 @@ Vue.prototype.movieDataProcess=dataProcess.movieDataProcess
 Vue.prototype.movieDataListProcess=dataProcess.movieDataListProcess
 Vue.prototype.bookDataProcess=dataProcess.bookDataProcess
 Vue.prototype.bookDataListProcess=dataProcess.bookDataListProcess
+Vue.prototype.evaluationProcess=dataProcess.evaluationProcess
+Vue.prototype.evaluationListProcess=dataProcess.evaluationListProcess
 
 Vue.use(VueAxios)
 

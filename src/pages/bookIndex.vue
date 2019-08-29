@@ -31,6 +31,10 @@
             </el-header>
 
             <el-main>
+              <page-card :items="info.line1" type="book"></page-card>
+              <page-card :items="info.line1" type="book"></page-card>
+              <page-card :items="info.line1" type="book"></page-card>
+              <page-card :items="info.line1" type="book"></page-card>
               <!--<info-card :info="info.line1[0]"></info-card>
               <bigger-logo-card :info="info.line1[0]" type="book"></bigger-logo-card>-->
             </el-main>
@@ -39,7 +43,27 @@
           
         </el-main>
 
-        <el-aside width="35%"></el-aside>
+        <el-aside width="35%">
+          <div id="space"></div>
+          
+          <el-container height="100%">
+            <el-header height="40px">
+              <el-row>
+                <el-col :span="15" >
+                  <h2>最受关注图书榜<hr/></h2>
+                  
+                </el-col>
+              </el-row>
+            </el-header>
+            <el-main>
+              <el-row v-for="(book,o) in info.line1" :key="o">
+                <el-col :span="24"><bigger-logo-card :item="book" type="book"></bigger-logo-card></el-col>
+              </el-row>
+            </el-main>
+          </el-container>
+
+
+        </el-aside>
       </el-container>
     </div>
 </template>
@@ -78,6 +102,11 @@ export default {
 </script>
 
 <style scoped>
+#space{
+  width: 100%;
+  height: 60px;
+  background-color: #E9EEF3;
+}
 #bookIndex {
     width: 100%;
     position: absolute;
@@ -88,10 +117,14 @@ h1{
   font-size: 25px;
   margin: 0;
 }
+h2{
+  font-size: 15px;
+  margin:0;
+  line-height: 20px;
+}
 .el-header, .el-footer {
-    /*background-color: #B3C0D1;*/
+    /*background-color: #B3C0D1;#E9EEF3;*/
     background-color: #E9EEF3;
-    color: #333;
     text-align: left;
     line-height: 30px;
   }
@@ -108,6 +141,7 @@ h1{
     color: #333;
     text-align: center;
     line-height: 160px;
+    border-collapse:inherit;
   }
   
   body > .el-container {

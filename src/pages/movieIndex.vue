@@ -15,8 +15,8 @@
             </el-header>
 
             <el-main>
-              <page-card :items="info.movie1" type="movie"></page-card>
-              <page-card :items="info.movie1" type="movie"></page-card>
+              <page-card :items="info.movie1.slice(0,5)" type="movie"></page-card>
+              <page-card :items="info.movie1.slice(5,10)" type="movie"></page-card>
             </el-main>
           </el-container>
 
@@ -39,7 +39,27 @@
           
         </el-main>
 
-        <el-aside width="35%"></el-aside>
+        <el-aside width="35%">
+          <div id="space"></div>
+          
+          <el-container height="100%">
+            <el-header height="40px">
+              <el-row>
+                <el-col :span="15" >
+                  <h2>最受关注影视榜<hr/></h2>
+                  
+                </el-col>
+              </el-row>
+            </el-header>
+            <el-main>
+              <el-row v-for="(movie,o) in info.movie1" :key="o">
+                <el-col :span="24"><bigger-logo-card :item="movie" type="movie"></bigger-logo-card></el-col>
+              </el-row>
+            </el-main>
+          </el-container>
+
+
+        </el-aside>
       </el-container>
     </div>
 </template>
@@ -52,6 +72,8 @@ export default {
   name: 'movieIndex',
   components: {
     'page-card': pageCard,
+    'bigger-logo-card': biggerLogoCard,
+    'info-card': infoCard,
   },
   data() {
     return {
@@ -62,7 +84,7 @@ export default {
     this.$axios
             .get('/showMovieIndex', {
                 params: {
-                    num: '5',
+                    num: '10',
                 }
             })
             .then(successResponse => {
@@ -87,6 +109,11 @@ export default {
 </script>
 
 <style scoped>
+#space{
+  width: 100%;
+  height: 60px;
+  background-color: #E9EEF3;
+}
 #movieIndex {
     width: 100%;
     position: absolute;
@@ -96,6 +123,11 @@ export default {
 h1{
   font-size: 25px;
   margin: 0;
+}
+h2{
+  font-size: 15px;
+  margin:0;
+  line-height: 20px;
 }
 .el-header, .el-footer {
     /*background-color: #B3C0D1;*/

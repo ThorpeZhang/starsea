@@ -45,5 +45,7 @@ export default {
   margin-top: 60px;
   padding-top: 0;
 
+  min-width: 1500px;
+
 }
 </style>

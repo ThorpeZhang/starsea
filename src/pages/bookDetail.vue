@@ -1,7 +1,7 @@
 <template>
     <div id="bookDetail">
     <el-container>
-        <page-detail :info="info.data" type="book"></page-detail>
+        <page-detail :info="info.data" :eva="info.evaluation" type="book"></page-detail>
     </el-container>
     </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import pageCard from '@/components/pageCard.vue'
 import pageDetail from '@/components/pageDetail.vue'
+import biggerLogoCard from '@/components/biggerLogoCard.vue'
 export default {
   name: 'bookDetail',
   components: {
@@ -21,7 +22,7 @@ export default {
     }
   },
   mounted() {
-    var title=this.$route.params.title
+    var title=this.$route.params.title//书名
     this.$axios
             .get('/showBook', {
                 params: {
@@ -30,6 +31,20 @@ export default {
             })
             .then(successResponse => {
                 this.$set(this.info,"data",this.bookDataProcess(successResponse))          
+            })
+            .catch(failResponse => {
+            })
+
+    this.$axios
+            .get('/showBookEvaluation', {
+                params: {
+                  name:title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
             })
             .catch(failResponse => {
             })

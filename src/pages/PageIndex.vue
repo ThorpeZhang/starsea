@@ -18,8 +18,8 @@
             </el-row>
           </el-header>
           <el-main>
-            <page-card :items="info.movies" type="movie"></page-card>
-            <page-card :items="info.movies" type="movie"></page-card>
+            <page-card :items="info.movies.slice(0,5)" type="movie"></page-card>
+            <page-card :items="info.movies.slice(5,10)" type="movie"></page-card>
           </el-main>
         </el-container>
 
@@ -58,7 +58,33 @@
 
 
       </el-main>
-      <el-aside width="35%"></el-aside>
+
+
+
+      <el-aside width="35%">
+          <div id="space"></div>
+          
+          <el-container height="100%">
+            <el-header height="40px">
+              <el-row>
+                <el-col :span="15" >
+                  <h2>最受关注图书榜<hr/></h2>
+                  
+                </el-col>
+              </el-row>
+            </el-header>
+            <el-main>
+              <el-row v-for="(movie,o) in info.movies" :key="o">
+                <el-col :span="24"><bigger-logo-card :item="movie" type="movie"></bigger-logo-card></el-col>
+              </el-row>
+            </el-main>
+          </el-container>
+
+
+        </el-aside>
+
+
+
     </el-container>
     </div>
 </template>
@@ -70,6 +96,7 @@ import pageCard from '@/components/pageCard.vue'
 import pageStar from '@/components/pageStar.vue'
 import pageShowStar from '@/components/pageShowStar.vue'
 import pagePlayCard from '@/components/pagePlayCard.vue'
+import biggerLogoCard from '@/components/biggerLogoCard.vue'
 export default {
   name: 'PageIndex',
   data(){
@@ -83,13 +110,14 @@ export default {
     'page-card': pageCard,
     'page-star': pageStar,
     'page-showstar': pageShowStar,
-    'page-playcard': pagePlayCard
+    'page-playcard': pagePlayCard,
+    'bigger-logo-card': biggerLogoCard,
   },
   mounted() {
     this.$axios
             .get('/showMovieIndex', {
                 params: {
-                    num: '5',
+                    num: '10',
                 }
             })
             .then(successResponse => {
@@ -126,6 +154,16 @@ export default {
 </script>
 
 <style scoped>
+h2{
+  font-size: 15px;
+  margin:0;
+  line-height: 20px;
+}
+#space{
+  width: 100%;
+  height: 60px;
+  background-color: #E9EEF3;
+}
 h1{
   font-size: 25px;
   margin: 0;
@@ -135,6 +173,7 @@ h1{
     position: absolute;
     top: 60px;
     left: 0;
+    min-width: 1500px;
 }
   .el-header, .el-footer {
     /*background-color: #B3C0D1;*/

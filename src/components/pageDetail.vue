@@ -1,18 +1,75 @@
 <template>
-  <!--数据怎么实现加载进来-->
+  <el-container>
+    <el-main>
+      <el-row>
+        <el-col :span="20" :offset="4">
+          <div class="infoCard">
+            <info-card :info="info"></info-card>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="20" :offset="4">
+          <div class="writeComment">
+            <h1>评价</h1>
+            <write-comment></write-comment>
+            <comment-box></comment-box>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="20" :offset="4">
+          <div class="description">
+            <h1>剧情简介</h1>
+            <p>
+              {{info.introduction}}
+            </p>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="20" :offset="4">
+          <div class="comment">
+            <h1>影视评论</h1>
+            <div v-for="(value,index) in eva" :key="value">
+              <people-comment :info="eva[index]"></people-comment>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </el-main>
 
-  <!--
-    现在的问题是 左右屏幕不会滚动
-  -->
-  <div>
-    <el-row>
-      <el-col :span="10" :offset="6">
-        <info-card :info="info"></info-card>
-      </el-col>
-    </el-row>
-  </div>
-    
-      
+    <!--侧边栏 推荐-->
+
+
+
+    <el-aside width="35%">
+          <div id="space"></div>
+          
+          <el-container height="100%">
+            <el-header height="40px">
+              <el-row>
+                <el-col :span="15" >
+                  <h2>推荐<hr/></h2>
+                  
+                </el-col>
+              </el-row>
+            </el-header>
+            <el-main>
+              <el-row v-for="(movie,o) in sdata.movies" :key="o">
+                <el-col :span="24"><bigger-logo-card :item="movie" type="movie"></bigger-logo-card></el-col>
+              </el-row>
+            </el-main>
+          </el-container>
+
+
+        </el-aside>
+
+
+
+
+
+  </el-container>
 </template>
 
 <script>
@@ -20,11 +77,14 @@ import pageShowStar from "./pageShowStar.vue"
 import writecomment from "./comment.vue"
 import commentBox from "./commentBox"
 import infoCard from "./infoCard.vue"
+import peopleComment from "./peopleComment.vue"
+import biggerLogoCard from '@/components/biggerLogoCard.vue'
 export default {
   name: 'pageDetail',
   data() {
     return {
       currentDate: new Date(),
+      sdata:{}
     };
   },
   components: {
@@ -32,70 +92,54 @@ export default {
       'write-comment': writecomment,
       'comment-box':commentBox,
       'info-card': infoCard,
+      'people-comment': peopleComment,
+    'bigger-logo-card': biggerLogoCard,
   },
   props:{
     info: Object,
-    type:String
+    type: String,
+    eva:Array,
+  },
+  mounted(){
+    this.$axios
+            .get('/showMovieIndex', {
+                params: {
+                    num: '10',
+                }
+            })
+            .then(successResponse => {
+              this.$set(this.sdata,"movies",this.movieDataListProcess(successResponse));
+              //alert(this.sdata.items[0].title)
+            })
+            .catch(failResponse => {
+            });
   }
 }
 </script>
 
 <style scoped>
-  template {
-    overflow: hidden;
-    min-width:1500px;
-  }
-  .content {
-    width: 100%;
-  }
-  .right {
-    text-align: left;
-    font-size: 20px;
-    border-top: 100px;
-    display: -moz-grid-line;
-  }
-  .title {
-    margin-left: 18%;
-    text-align: left;
-    font-size: 30px;
-  }
-  .imagePaper {
-    margin-left: 0%;
-    margin-top: 15px;/*
-    width: 300px;
-    height: 400px;*/
-    overflow: hidden;
-    position: relative;
-  }
-  .imagePaper img {
-    width:100%;
-    height:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-			/*为了效果明显，可以将如下边框打开，看一下效果*/
-			/* border:1px solid black; */
-  }
-  .mark {
-    font-size: 30px;
-    color: orange;
-    padding-top: 10px;
-  }
-  .more-info {
-    line-height: 40px;
-    padding-top: 10px;
-  }
-  .description {
-    text-align: left;
-    margin: 20px 15% 50px;
-  }
-  .comment {
-    text-align: left;
-    margin: 20px 15% 50px;
+h2{
+  font-size: 15px;
+  margin:0;
+  line-height: 20px;
+  text-align: left;
+}
+#space{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+  .rightBlock {
+    background: green;
   }
   .writeComment {
     text-align: left;
-    margin: 20px 15% 50px;
   }
-
+  .description {
+    text-align: left;
+  }
+  .comment {
+    text-align: left;
+  }
+  
 </style>

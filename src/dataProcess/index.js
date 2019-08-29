@@ -54,5 +54,22 @@ export default {
             resArray.push(this.bookDataProcess({data:successResponse.data[i]}));
         }
         return resArray;
+    },
+    evaluationProcess: function (evaluation) {
+        return {
+            author: evaluation.username,
+            time: evaluation.time,
+            mark: evaluation.score,
+            content: evaluation.evaluation,
+            likeNum: evaluation.likeNum,
+        }
+    },
+    evaluationListProcess: function (successResponse) {
+        var resArray=[];
+        var len=successResponse.data.length;
+        for(var i=0;i<len;i++){
+            resArray.push(this.evaluationProcess(successResponse.data[i]));
+        }
+        return resArray;
     }
   }
