@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
+    <el-form status-icon ref="form" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">请登录您的帐号</h3>
       <el-form-item label="账号" prop="username">
         <el-input type="text" placeholder="请输入账号" v-model="form.username"/>
@@ -9,7 +9,7 @@
         <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
+        <el-button type="primary" v-on:click="onSubmit('form')">登录</el-button>
       </el-form-item>
     </el-form>
 
@@ -33,6 +33,31 @@
   export default {
     name: "PageLogin",
     data() {
+      var validatePass=(rule,value,callback) => {
+        if(value===''){
+          callback(new Error('请输入密码'));
+        }
+        else if(value.length<8 || value.length>16){
+          callback(new Error('密码长度在8-16位之间'));
+        }
+        else{
+          if(this.form.checkpassword!==''){
+            this.$refs.form.validateField('checkPassword');
+          }
+          callback();
+        }
+      };
+      var validateUsername=(rule,value,callback) => {
+        if(value===''){
+          callback(new Error('请输入用户名'));
+        }
+        else if(value.length<3 || value.length>12){
+          callback(new Error('用户名长度在3-12位之间'));
+        }
+        else{
+          callback();
+        }
+      };
       return {
         form: {
           username: '',
@@ -42,11 +67,11 @@
         // 表单验证，需要在 el-form-item 元素中增加 prop 属性
         rules: {
           username: [
-            {required: true, message: '账号不可为空', trigger: 'blur'}
+            {validator: validateUsername, trigger: 'blur'}
           ],
           password: [
-            {required: true, message: '密码不可为空', trigger: 'blur'}
-          ]
+            {validator: validatePass, trigger: 'blur'}
+          ],
         },
 
         // 对话框显示和隐藏
@@ -56,31 +81,14 @@
     //store,
     methods: {
       onSubmit(formName) {
-        //this.$store.commit('login','ztt',true)
-        // 为表单绑定验证功能
-         //this.$alert(this.$store.state.userAccount.username)
-         //this.$alert('准备发送数据')
-         //this.$router.replace({path:'/'});
-
-        this.$axios
-            .post('/login', {
-                username: this.form.username,
-                password: this.form.password
-            })
-            .then(successResponse =>{
-                //this.responseResult = JSON.stringify(successResponse.data)
-                if(successResponse.data.code === 200) {
-                    this.$store.commit('login',this.form.username)
-                    this.$router.replace({path:'/'});
-
-                }
-                else{
-                    alert(successResponse.data.message)
-                }
-            })
-            .catch(failResponse => {})
-        
-        //alert('数据处理完毕')
+         this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.login(this)
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     }
   }
@@ -90,7 +98,7 @@
   .login-box {
     border: 1px solid #DCDFE6;
     width: 350px;
-    margin: 180px auto;
+    margin: 130px auto;
     padding: 35px 35px 15px 35px;
     border-radius: 5px;
     -webkit-border-radius: 5px;

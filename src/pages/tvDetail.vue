@@ -1,7 +1,7 @@
 <template>
     <div id="movieDetail">
     <el-container>
-        <page-detail :info="info.data" type="TV"></page-detail>
+        <page-detail :eva="info.evaluation" :info="info.data" type="TV"></page-detail>
     </el-container>
     </div>
 </template>
@@ -20,6 +20,43 @@ export default {
       info: {},
     }
   },
+  computed: {
+    title:function(){
+      return this.$route.params.title
+    }
+  },
+  watch:{
+    title(){
+      this.$axios
+            .get('/showTV', {
+                params: {
+                  name:this.title
+                    //name: "寄生虫"
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"data",this.movieDataProcess(successResponse))
+            })
+            .catch(failResponse => {
+            });
+
+      this.$axios
+            .get('/showTVEvaluation', {
+                params: {
+                  name:this.title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
+            })
+            .catch(failResponse => {
+            })
+      
+    }
+
+  },
   mounted() {
     var title=this.$route.params.title
     this.$axios
@@ -31,6 +68,21 @@ export default {
             })
             .then(successResponse => {
                 this.$set(this.info,"data",this.movieDataProcess(successResponse))
+            })
+            .catch(failResponse => {
+            });
+
+
+    this.$axios
+            .get('/showTVEvaluation', {
+                params: {
+                  name:title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
             })
             .catch(failResponse => {
             })

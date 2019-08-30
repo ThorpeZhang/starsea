@@ -34,8 +34,8 @@
             </el-row>
           </el-header>
           <el-main>
-            <page-card :items="info.TV" type="TV"></page-card>
-            <page-card :items="info.TV" type="TV"></page-card>
+            <page-card :items="info.TV.slice(0,5)" type="TV"></page-card>
+            <page-card :items="info.TV.slice(5,10)" type="TV"></page-card>
           </el-main>
 
 
@@ -49,8 +49,8 @@
             </el-row>
           </el-header>
           <el-main>
-            <page-card :items="info.books" type="book"></page-card>
-            <page-card :items="info.books" type="book"></page-card>
+            <page-card :items="info.books.slice(0,5)" type="book"></page-card>
+            <page-card :items="info.books.slice(5,10)" type="book"></page-card>
           </el-main>
         </el-container>
         
@@ -90,11 +90,7 @@
 </template>
 
 <script>
-import pageHeader from '@/components/pageHeader.vue'
-import pageSearch from '@/components/pageSearch.vue'
 import pageCard from '@/components/pageCard.vue'
-import pageStar from '@/components/pageStar.vue'
-import pageShowStar from '@/components/pageShowStar.vue'
 import pagePlayCard from '@/components/pagePlayCard.vue'
 import biggerLogoCard from '@/components/biggerLogoCard.vue'
 export default {
@@ -105,11 +101,7 @@ export default {
     }
   },
   components: {
-    'page-header': pageHeader,
-    'page-search': pageSearch,
     'page-card': pageCard,
-    'page-star': pageStar,
-    'page-showstar': pageShowStar,
     'page-playcard': pagePlayCard,
     'bigger-logo-card': biggerLogoCard,
   },
@@ -129,7 +121,7 @@ export default {
     this.$axios
             .get('/showBookIndex', {
                 params: {
-                    num: '5',
+                    num: '11',
                 }
             })
             .then(successResponse => {
@@ -141,7 +133,7 @@ export default {
     this.$axios
             .get('/showTVIndex', {
                 params: {
-                    num: '5',
+                    num: '10',
                 }
             })
             .then(successResponse => {

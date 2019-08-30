@@ -15,8 +15,8 @@
             </el-header>
 
             <el-main>
-              <page-card :items="info.line1" type="book"></page-card>
-              <page-card :items="info.line1" type="book"></page-card>
+              <page-card :items="info.line1.slice(0,5)" type="book"></page-card>
+              <page-card :items="info.line1.slice(5,10)" type="book"></page-card>
             </el-main>
           </el-container>
 
@@ -31,10 +31,10 @@
             </el-header>
 
             <el-main>
-              <page-card :items="info.line1" type="book"></page-card>
-              <page-card :items="info.line1" type="book"></page-card>
-              <page-card :items="info.line1" type="book"></page-card>
-              <page-card :items="info.line1" type="book"></page-card>
+              <page-card :items="info.line1.slice(0,5)" type="book"></page-card>
+              <page-card :items="info.line1.slice(5,10)" type="book"></page-card>
+              <page-card :items="info.line1.slice(2,7)" type="book"></page-card>
+              <page-card :items="info.line1.slice(4,9)" type="book"></page-card>
               <!--<info-card :info="info.line1[0]"></info-card>
               <bigger-logo-card :info="info.line1[0]" type="book"></bigger-logo-card>-->
             </el-main>
@@ -86,14 +86,15 @@ export default {
     }
   },
   mounted() {
+    //alert("图书主页")
     this.$axios
             .get('/showBookIndex', {
                 params: {
-                    num: '5',
+                    num: '10',
                 }
             })
             .then(successResponse => {
-              this.$set(this.info,"line1",this.movieDataListProcess(successResponse));
+              this.$set(this.info,"line1",this.bookDataListProcess(successResponse));
             })
             .catch(failResponse => {
             });

@@ -11,26 +11,40 @@
       <el-row>
         <el-col :span="20" :offset="4">
           <div class="writeComment">
-            <h1>评价</h1>
-            <write-comment></write-comment>
-            <comment-box></comment-box>
+            <el-button type="success" disabled v-if="done">您已评论</el-button>
+            <el-button
+              type="success"
+              v-else-if="isLogin() && !done && !show"
+              @click="show=!show"
+              autofocus="true"
+            >撰写评论</el-button>
+            <el-button
+              type="danger"
+              v-else-if="isLogin()&& !done && show"
+              @click="show=!show"
+              autofocus="true"
+            >取消评论</el-button>
+            <el-button type="primary" v-else disabled>登录后评论</el-button>
+            <el-collapse-transition>
+              <write-comment v-show="show" :type="type" :id="info.id"></write-comment>
+            </el-collapse-transition>
           </div>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="20" :offset="4">
           <div class="description">
-            <h1>剧情简介</h1>
-            <p>
-              {{info.introduction}}
-            </p>
+            <h1 v-if="type==='movie'">剧情简介</h1>
+            <h1 v-else>内容简介</h1>
+            <p id="introbody">{{info.introduction}}</p>
           </div>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="20" :offset="4">
           <div class="comment">
-            <h1>影视评论</h1>
+            <h1 v-if="type==='movie'">影视评论</h1>
+            <h1 v-else>图书评论</h1>
             <div v-for="(value,index) in eva" :key="value">
               <people-comment :info="eva[index]"></people-comment>
             </div>
@@ -41,105 +55,178 @@
 
     <!--侧边栏 推荐-->
 
-
-
     <el-aside width="35%">
-          <div id="space"></div>
-          
-          <el-container height="100%">
-            <el-header height="40px">
-              <el-row>
-                <el-col :span="15" >
-                  <h2>推荐<hr/></h2>
-                  
-                </el-col>
-              </el-row>
-            </el-header>
-            <el-main>
-              <el-row v-for="(movie,o) in sdata.movies" :key="o">
-                <el-col :span="24"><bigger-logo-card :item="movie" type="movie"></bigger-logo-card></el-col>
-              </el-row>
-            </el-main>
-          </el-container>
+      <div id="space"></div>
 
-
-        </el-aside>
-
-
-
-
-
+      <el-container height="100%">
+        <el-header height="40px">
+          <el-row>
+            <el-col :span="15">
+              <h2>
+                推荐
+                <hr />
+              </h2>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-main>
+          <el-row v-for="(_item,o) in sdata.items" :key="o">
+            <el-col :span="24">
+              <bigger-logo-card :item="_item" :type="type"></bigger-logo-card>
+            </el-col>
+          </el-row>
+        </el-main>
+      </el-container>
+    </el-aside>
   </el-container>
 </template>
 
 <script>
-import pageShowStar from "./pageShowStar.vue"
-import writecomment from "./comment.vue"
-import commentBox from "./commentBox"
-import infoCard from "./infoCard.vue"
-import peopleComment from "./peopleComment.vue"
-import biggerLogoCard from '@/components/biggerLogoCard.vue'
+import pageShowStar from "./pageShowStar.vue";
+import writecomment from "./writeComment.vue";
+import infoCard from "./infoCard.vue";
+import peopleComment from "./peopleComment.vue";
+import biggerLogoCard from "@/components/biggerLogoCard.vue";
 export default {
-  name: 'pageDetail',
+  name: "pageDetail",
   data() {
     return {
       currentDate: new Date(),
-      sdata:{}
+      sdata: {},
+      show: false
     };
   },
-  components: {
-      'page-showstar': pageShowStar,
-      'write-comment': writecomment,
-      'comment-box':commentBox,
-      'info-card': infoCard,
-      'people-comment': peopleComment,
-    'bigger-logo-card': biggerLogoCard,
+  computed: {
+    done: function() {
+      //alert(this.info.type)
+      if (this.info.type === "movie" || this.info.type === "TV") {
+        this.$axios.get("/isMovieEvaluation", {
+          params: {
+            username: this.getUsername(),
+            movieId: this.info.id
+          }
+        })
+        .then(successResponse =>{
+          alert(successResponse.data)
+          return successResponse.data;
+        })
+        .catch(failResponse=>{
+          //alert(failResponse)
+        })
+      }
+      else if(this.info.type === "book"){
+        this.$axios.get("/isBookEvaluation", {
+          params: {
+            username: this.getUsername(),
+            isbn: this.info.id
+          }
+        })
+        .then(successResponse =>{
+          return successResponse.data;
+        })
+      }
+    }
   },
-  props:{
+  components: {
+    "page-showstar": pageShowStar,
+    "write-comment": writecomment,
+    "info-card": infoCard,
+    "people-comment": peopleComment,
+    "bigger-logo-card": biggerLogoCard
+  },
+  props: {
     info: Object,
     type: String,
-    eva:Array,
+    eva: Array
   },
-  mounted(){
-    this.$axios
-            .get('/showMovieIndex', {
-                params: {
-                    num: '10',
-                }
-            })
-            .then(successResponse => {
-              this.$set(this.sdata,"movies",this.movieDataListProcess(successResponse));
-              //alert(this.sdata.items[0].title)
-            })
-            .catch(failResponse => {
-            });
+  mounted() {
+    if (this.type === "movie") {
+      this.$axios
+        .get("/showMovieIndex", {
+          params: {
+            num: "10"
+          }
+        })
+        .then(successResponse => {
+          this.$set(
+            this.sdata,
+            "items",
+            this.movieDataListProcess(successResponse)
+          );
+          //alert(this.sdata.items[0].title)
+        })
+        .catch(failResponse => {});
+    } else if (this.type === "book") {
+      this.$axios
+        .get("/showBookIndex", {
+          params: {
+            num: "10"
+          }
+        })
+        .then(successResponse => {
+          this.$set(
+            this.sdata,
+            "items",
+            this.bookDataListProcess(successResponse)
+          );
+          //alert(this.sdata.items[0].title)
+        })
+        .catch(failResponse => {});
+    } else if (this.type === "TV") {
+      this.$axios
+        .get("/showTVIndex", {
+          params: {
+            num: "10"
+          }
+        })
+        .then(successResponse => {
+          this.$set(
+            this.sdata,
+            "items",
+            this.movieDataListProcess(successResponse)
+          );
+          //alert(this.sdata.items[0].title)
+        })
+        .catch(failResponse => {});
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-h2{
+#introbody {
+  text-indent: 35px;
+  line-height: 25px;
+}
+h2 {
   font-size: 15px;
-  margin:0;
+  margin: 0;
   line-height: 20px;
   text-align: left;
 }
-#space{
+#space {
   width: 100%;
   height: 60px;
   background-color: white;
 }
-  .rightBlock {
-    background: green;
-  }
-  .writeComment {
-    text-align: left;
-  }
-  .description {
-    text-align: left;
-  }
-  .comment {
-    text-align: left;
-  }
-  
+.rightBlock {
+  background: green;
+}
+.writeComment {
+  text-align: left;
+}
+.description {
+  text-align: left;
+}
+.comment {
+  text-align: left;
+  margin-top: 50px;
+}
+
+.el-aside {
+  background-color: white;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
 </style>

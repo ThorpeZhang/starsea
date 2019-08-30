@@ -1,7 +1,7 @@
 <template>
     <div id="movieDetail">
     <el-container>
-        <page-detail :info="info.data" type="movie"></page-detail>
+        <page-detail :info="info.data" :eva="info.evaluation" type="movie"></page-detail>
     </el-container>
     </div>
 </template>
@@ -20,6 +20,43 @@ export default {
       info: {},
     }
   },
+  computed: {
+    title:function(){
+      return this.$route.params.title
+    }
+  },
+  watch:{
+    title(){
+      this.$axios
+            .get('/showMovie', {
+                params: {
+                  name:this.title
+                    //name: "寄生虫"
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"data",this.movieDataProcess(successResponse))
+            })
+            .catch(failResponse => {
+            });
+
+      this.$axios
+            .get('/showMovieEvaluation', {
+                params: {
+                  name:this.title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
+            })
+            .catch(failResponse => {
+            })
+      
+    }
+
+  },
   mounted() {
     var title=this.$route.params.title
     this.$axios
@@ -31,22 +68,20 @@ export default {
             })
             .then(successResponse => {
                 this.$set(this.info,"data",this.movieDataProcess(successResponse))
-              /*
-                
-                this.$set(this.info,"title",successResponse.data.name);
-                this.$set(this.info,"mark",successResponse.data.score);
-                this.$set(this.info,"imgsrc",successResponse.data.imgAddr)
-                var _items=[
-                    {name: '导演', value:successResponse.data.director},
-                    {name: '主演', value:successResponse.data.stars},
-                    {name: '类型', value:successResponse.data.types},
-                    {name: '制片国家/地区', value:successResponse.data.region},
-                    {name: '语言', value:successResponse.data.language},
-                    {name: '上映日期', value:successResponse.data.releaseYear},
-                  ];
-                  this.$set(this.info,"items",_items);
-                  */
-                
+            })
+            .catch(failResponse => {
+            });
+
+    this.$axios
+            .get('/showMovieEvaluation', {
+                params: {
+                  name:title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
             })
             .catch(failResponse => {
             })

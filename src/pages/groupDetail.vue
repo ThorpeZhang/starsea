@@ -33,12 +33,7 @@ a:hover {
 </style>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import pageSearch from "../components/pageSearch.vue";
 import pageCard from "../components/pageCard.vue";
-import pageStar from "../components/pageStar.vue";
-import pageShowStar from "../components/pageShowStar.vue";
-import pagePlayCard from "../components/pagePlayCard.vue";
 import pageGroupItem from "../components/pageGroupItem.vue";
 import groupname from "../groupcomponents/groupName.vue";
 import grouppost from "../groupcomponents/groupPost.vue";

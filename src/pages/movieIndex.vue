@@ -31,8 +31,8 @@
             </el-header>
 
             <el-main>
-              <page-card :items="info.tv1" type="TV"></page-card>
-              <page-card :items="info.tv1" type="TV"></page-card>
+              <page-card :items="info.tv1.slice(0,5)" type="TV"></page-card>
+              <page-card :items="info.tv1.slice(5,10)" type="TV"></page-card>
             </el-main>
           </el-container>
 
@@ -96,7 +96,7 @@ export default {
     this.$axios
             .get('/showTVIndex', {
                 params: {
-                    num: '5',
+                    num: '10',
                 }
             })
             .then(successResponse => {

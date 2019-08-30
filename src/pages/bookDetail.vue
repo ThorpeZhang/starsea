@@ -21,6 +21,43 @@ export default {
       info: {},
     }
   },
+  computed: {
+    title:function(){
+      return this.$route.params.title
+    }
+  },
+  watch:{
+    title(){
+      this.$axios
+            .get('/showBook', {
+                params: {
+                  name:this.title
+                    //name: "寄生虫"
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"data",this.bookDataProcess(successResponse))
+            })
+            .catch(failResponse => {
+            });
+
+      this.$axios
+            .get('/showBookEvaluation', {
+                params: {
+                  name:this.title,
+                  flag:2
+                  //1是点赞数排序；2是评论日期排序
+                }
+            })
+            .then(successResponse => {
+                this.$set(this.info,"evaluation",this.evaluationListProcess(successResponse))          
+            })
+            .catch(failResponse => {
+            })
+      
+    }
+
+  },
   mounted() {
     var title=this.$route.params.title//书名
     this.$axios

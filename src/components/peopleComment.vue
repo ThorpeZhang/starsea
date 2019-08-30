@@ -9,14 +9,13 @@
       <span class="time">{{info.time}}</span>
       <span class="number">{{info.likeNum}}人已赞</span>
     </div>
-    <span>{{info.content}}</span>
+    <span id="cmtbody">{{info.content}}</span>
     <div class="zan">
-      <el-button>
+      <el-button size="mini">
         <i class="el-icon-star-off"></i>
       </el-button>
 
     </div>
-    <hr>
   </div>
 
 </template>
@@ -31,7 +30,11 @@
 
 <style scoped>
   #peopleComment {
-
+    margin: 10px 0 50px 0;
+  }
+  #cmtbody{
+    text-indent:35px;
+    line-height: 30px;
   }
   .head {
     text-align: left;
@@ -46,5 +49,7 @@
   }
   .zan {
     text-align: right;
+    position: relative;
+    bottom: 5px;
   }
 </style>

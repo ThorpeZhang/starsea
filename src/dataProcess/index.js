@@ -1,12 +1,37 @@
 export default {
     movieDataProcess: function (successResponse) {
-        //alert("元素处理")
-        //alert("函数调用")
+        var objid=successResponse.data.movieId
+        var items=[
+            objid.timestamp,
+            objid.machineIdentifier,
+            objid.processIdentifier,
+            objid.counter,
+        ];
+        var str=''
+        str = str+ items[0].toString(16);
+        str = str+ items[1].toString(16);
+        str = str+ items[2].toString(16);
+        str = str+ items[3].toString(16);
+        var itemtype=''
+        if(successResponse.data.flag==='true'){
+            itemtype='movie'
+        }
+        else{
+            itemtype='TV'
+        }
+
+        var info ='';
+        info=info+successResponse.data.director+' -- ';
+        info=info+successResponse.data.stars+' -- ';
+        info=info+successResponse.data.types;
         return {
             title:successResponse.data.name,
             imgsrc:successResponse.data.imgAddr,
             introduction:successResponse.data.introduction,
             mark:successResponse.data.score,
+            id: str,
+            tags:info,
+            type: itemtype,
             items: [
                 {name: '导演', value:successResponse.data.director},
                 {name: '主演', value:successResponse.data.stars},
@@ -27,6 +52,10 @@ export default {
         return resArray;
     },
     bookDataProcess: function (successResponse) {
+        var info ='';
+        info=info+successResponse.data.author+' -- ';
+        info=info+successResponse.data.bookTypes+' -- ';
+        info=info+successResponse.data.publishingCompany;
         //alert("元素处理")
         //alert("函数调用")
         return {
@@ -34,6 +63,9 @@ export default {
             imgsrc:successResponse.data.imgAddr,
             introduction:successResponse.data.introduction,
             mark:successResponse.data.score,
+            id:successResponse.data.isbn,
+            tags:info,
+            type: 'book',
             items: [
                 {name: '作者', value:successResponse.data.author},
                 {name: '出版社', value:successResponse.data.publishingCompany},
