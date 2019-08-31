@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueAxios from 'vue-axios'
 import store from './store.js'
 import dataProcess from './dataProcess/index'
+import './common/font/font.css'
 
 var axios = require('axios')
 axios.defaults.baseURL = 'http://114.115.131.124:8666/api'
@@ -20,6 +21,11 @@ Vue.prototype.bookDataProcess = dataProcess.bookDataProcess
 Vue.prototype.bookDataListProcess = dataProcess.bookDataListProcess
 Vue.prototype.evaluationProcess = dataProcess.evaluationProcess
 Vue.prototype.evaluationListProcess = dataProcess.evaluationListProcess
+Vue.prototype.groupDataProcess = dataProcess.groupDataProcess
+Vue.prototype.groupListProcess = dataProcess.groupListProcess
+Vue.prototype.topicDataProcess = dataProcess.topicDataProcess
+Vue.prototype.topicListProcess = dataProcess.topicListProcess
+Vue.prototype.allListProcess = dataProcess.allListProcess
 
 
 Vue.use(VueAxios)
@@ -227,4 +233,67 @@ Vue.prototype.getId=function(items){
     str+=parseInt(items[i],16)
   }
   return str
+}
+
+//查询是否评论过
+Vue.prototype.done=function(info) {
+  if (info.type === "movie" || info.type === "TV") {
+    this.$axios.get("/isMovieEvaluation", {
+      params: {
+        username: this.getUsername(),
+        movieId: info.id
+      }
+    })
+    .then(successResponse =>{
+      this.$set(info,"isDone",successResponse.data)
+      //alert(info.title)
+    })
+    .catch(failResponse=>{
+    })
+  }
+  else if(this.info.type === "book"){
+    this.$axios.get("/isBookEvaluation", {
+      params: {
+        username: this.getUsername(),
+        isbn: this.info.id
+      }
+    })
+    .then(successResponse =>{
+      this.$set(info,"isDone",successResponse.data)
+    })
+  }
+}
+
+
+//查询是否在小组中
+Vue.prototype.beInGroup=function(id,name,info){
+  this.$axios.get('isJoinGroup',{
+    params:{
+      groupId: id,
+      username: name,
+    }
+  })
+  .then(successResponse => {
+    this.$set(info,"beInGroup",successResponse.data)
+    alert(successResponse.data)
+  })
+}
+
+//发表帖子
+Vue.prototype.addPost=function(groupId,title,username,mainBody){
+  this.$axios.post('addPost',{
+    groupId: groupId,
+    title: title,
+    username: username,
+    mainBody: mainBody,
+  })
+  .then(successResponse => {
+    if(successResponse.data==="SUCCESS"){
+      this.$notify({
+        title: "发表成功",
+        message: "快刷新页面试试吧",
+        type: "success"
+      });
+    }
+  })
 }

@@ -1,6 +1,6 @@
 <template>
     <el-row>
-  <el-col :span="2" v-for="(o, index) in 5"  :key="o" :offset="index > 0 ? 2 : 4">
+  <el-col :span="2" v-for="(o, index) in items"  :key="o" :offset="index > 0 ? 2 : 4">
     <logo-card :item="items[index]" :type="type"></logo-card>
   </el-col>
 </el-row>

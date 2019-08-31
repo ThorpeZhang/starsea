@@ -1,7 +1,7 @@
 <template>
   <div class="page-card">
     <div class="logo">
-      <a :href="'#/'+type+'Detail/'+item.title">
+      <a :href="'#/'+item.type+'Detail/'+item.title">
         <img :src="item.imgsrc"/>
       </a>
     </div>
@@ -37,11 +37,16 @@ div{
   padding: 0px;
   margin: 0px;
   overflow: hidden;
+  font-family: 'pf';
 }
 .page-card{
   margin: 0 0 25px 0;
   height: 210px;
   width: 120px;
+  transition: 0.6s;
+}
+.page-card:hover{
+  transform: scale(1.1);
 }
 .logo{
   height: 80%;

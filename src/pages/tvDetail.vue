@@ -53,6 +53,7 @@ export default {
             })
             .catch(failResponse => {
             })
+            this.done(this.info.data);
       
     }
 
@@ -86,6 +87,8 @@ export default {
             })
             .catch(failResponse => {
             })
+
+            //this.done(this.info.data);
   },
 }
 </script>

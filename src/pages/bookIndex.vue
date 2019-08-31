@@ -17,6 +17,9 @@
             <el-main>
               <page-card :items="info.line1.slice(0,5)" type="book"></page-card>
               <page-card :items="info.line1.slice(5,10)" type="book"></page-card>
+              <page-card :items="info.line1.slice(10,15)" type="book"></page-card>
+              <page-card :items="info.line1.slice(15,20)" type="book"></page-card>
+              <page-card :items="info.line1.slice(20,25)" type="book"></page-card>
             </el-main>
           </el-container>
 
@@ -31,10 +34,11 @@
             </el-header>
 
             <el-main>
-              <page-card :items="info.line1.slice(0,5)" type="book"></page-card>
-              <page-card :items="info.line1.slice(5,10)" type="book"></page-card>
-              <page-card :items="info.line1.slice(2,7)" type="book"></page-card>
-              <page-card :items="info.line1.slice(4,9)" type="book"></page-card>
+              <page-card :items="info.line2.slice(0,5)" type="book"></page-card>
+              <page-card :items="info.line2.slice(5,10)" type="book"></page-card>
+              <page-card :items="info.line2.slice(10,15)" type="book"></page-card>
+              <page-card :items="info.line2.slice(15,20)" type="book"></page-card>
+              <page-card :items="info.line2.slice(20,25)" type="book"></page-card>
               <!--<info-card :info="info.line1[0]"></info-card>
               <bigger-logo-card :info="info.line1[0]" type="book"></bigger-logo-card>-->
             </el-main>
@@ -56,7 +60,7 @@
               </el-row>
             </el-header>
             <el-main>
-              <el-row v-for="(book,o) in info.line1" :key="o">
+              <el-row v-for="(book,o) in info.line2.slice(0,12)" :key="o">
                 <el-col :span="24"><bigger-logo-card :item="book" type="book"></bigger-logo-card></el-col>
               </el-row>
             </el-main>
@@ -90,11 +94,23 @@ export default {
     this.$axios
             .get('/showBookIndex', {
                 params: {
-                    num: '10',
+                    num: '26',
                 }
             })
             .then(successResponse => {
               this.$set(this.info,"line1",this.bookDataListProcess(successResponse));
+            })
+            .catch(failResponse => {
+            });
+
+            this.$axios
+            .get('/showBookByEvaluationNum', {
+                params: {
+                    num: '26',
+                }
+            })
+            .then(successResponse => {
+              this.$set(this.info,"line2",this.bookDataListProcess(successResponse));
             })
             .catch(failResponse => {
             });
@@ -106,7 +122,7 @@ export default {
 #space{
   width: 100%;
   height: 60px;
-  background-color: #E9EEF3;
+  background-color: white;
 }
 #bookIndex {
     width: 100%;
@@ -125,20 +141,20 @@ h2{
 }
 .el-header, .el-footer {
     /*background-color: #B3C0D1;#E9EEF3;*/
-    background-color: #E9EEF3;
+    background-color: white;
     text-align: left;
     line-height: 30px;
   }
   
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 200px;
   }
   
   .el-main {
-    background-color: #E9EEF3;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 160px;

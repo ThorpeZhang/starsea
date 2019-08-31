@@ -85,6 +85,7 @@ export default {
             })
             .catch(failResponse => {
             })
+            this.done(this.info.data);
   },
 }
 </script>

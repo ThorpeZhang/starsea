@@ -11,16 +11,16 @@
       <el-row>
         <el-col :span="20" :offset="4">
           <div class="writeComment">
-            <el-button type="success" disabled v-if="done">您已评论</el-button>
+            <el-button type="success" disabled v-if="info.isDone">您已评论</el-button>
             <el-button
               type="success"
-              v-else-if="isLogin() && !done && !show"
+              v-else-if="isLogin() && !show"
               @click="show=!show"
               autofocus="true"
             >撰写评论</el-button>
             <el-button
               type="danger"
-              v-else-if="isLogin()&& !done && show"
+              v-else-if="isLogin() && show"
               @click="show=!show"
               autofocus="true"
             >取消评论</el-button>
@@ -43,7 +43,7 @@
       <el-row>
         <el-col :span="20" :offset="4">
           <div class="comment">
-            <h1 v-if="type==='movie'">影视评论</h1>
+            <h1 v-if="type==='movie'||type==='TV'">影视评论</h1>
             <h1 v-else>图书评论</h1>
             <div v-for="(value,index) in eva" :key="value">
               <people-comment :info="eva[index]"></people-comment>
@@ -93,39 +93,8 @@ export default {
     return {
       currentDate: new Date(),
       sdata: {},
-      show: false
+      show: false,
     };
-  },
-  computed: {
-    done: function() {
-      //alert(this.info.type)
-      if (this.info.type === "movie" || this.info.type === "TV") {
-        this.$axios.get("/isMovieEvaluation", {
-          params: {
-            username: this.getUsername(),
-            movieId: this.info.id
-          }
-        })
-        .then(successResponse =>{
-          alert(successResponse.data)
-          return successResponse.data;
-        })
-        .catch(failResponse=>{
-          //alert(failResponse)
-        })
-      }
-      else if(this.info.type === "book"){
-        this.$axios.get("/isBookEvaluation", {
-          params: {
-            username: this.getUsername(),
-            isbn: this.info.id
-          }
-        })
-        .then(successResponse =>{
-          return successResponse.data;
-        })
-      }
-    }
   },
   components: {
     "page-showstar": pageShowStar,
@@ -139,7 +108,12 @@ export default {
     type: String,
     eva: Array
   },
-  mounted() {
+  watch: {
+    info(){
+      this.done(this.info);
+    }
+  },
+  mounted:function() {
     if (this.type === "movie") {
       this.$axios
         .get("/showMovieIndex", {
@@ -153,7 +127,6 @@ export default {
             "items",
             this.movieDataListProcess(successResponse)
           );
-          //alert(this.sdata.items[0].title)
         })
         .catch(failResponse => {});
     } else if (this.type === "book") {
@@ -189,7 +162,7 @@ export default {
         })
         .catch(failResponse => {});
     }
-  }
+  },
 };
 </script>
 
@@ -197,6 +170,7 @@ export default {
 #introbody {
   text-indent: 35px;
   line-height: 25px;
+  font-family: "pingfang";
 }
 h2 {
   font-size: 15px;

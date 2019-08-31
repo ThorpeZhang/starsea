@@ -26,6 +26,7 @@ export default {
 </script>
 
 <style>
+@import "./common/font/font.css";
 #search-bar{
   position: absolute;
   top: 0;
@@ -44,6 +45,6 @@ export default {
   padding-top: 0;
 
   min-width: 1500px;
-
+  font-family: pf;
 }
 </style>

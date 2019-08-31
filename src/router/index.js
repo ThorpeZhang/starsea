@@ -14,8 +14,10 @@ import tvDetail from '@/pages/tvDetail.vue'
 import pageLogin from '@/pages/PageLogin.vue'
 import pageRegister from '@/pages/PageRegister.vue'
 
-import groupDetail from '@/pages/groupDetail.vue'
-import tieziDetail from '../pages/tieziDetail.vue'
+import groupDetail from "@/groupcomponents/groupDetail.vue"
+import topicDetail from "@/groupcomponents/topicDetail.vue"
+import pageUser from "@/pages/pageUser.vue"
+import groupMemberPage from "@/pages/groupMemberPage.vue"
 
 import mainSearchPage from "../pages/mainSearchPage";
 
@@ -69,19 +71,29 @@ export default new Router({
       component: pageRegister
     },
     {
-      path: '/groupDetail',
-      name: 'groupDetail',
-      component: groupDetail
-    },
-    {
       path: '/mainSearchPage',
       name: mainSearchPage,
       component: mainSearchPage
     },
     {
-      path:'/tieziDetail',
-      name:'tieziDetail',
-      component:tieziDetail
+      path: '/groupDetail/:title',
+      name: 'groupDetail',
+      component: groupDetail
+    },
+    {
+      path: '/topicDetail/:title',
+      name: 'topicDetail',
+      component: topicDetail
+    },
+    {
+      path: '/pageUser/:id',
+      name: 'pageUser',
+      component: pageUser,
+    },
+    {
+      path: '/groupMemberPage',
+      name: 'groupMemberPage',
+      component: groupMemberPage
     }
   ]
 })

@@ -56,7 +56,7 @@
                 this.responseResult = JSON.stringify(successResponse.data)
                 if(successResponse.data.code === 200) {
                     flag=responseResult;
-                    alert(flag);
+                    //alert(flag);
                 }
             })
             .catch(failResponse => {alert('连接失败');})
@@ -140,7 +140,14 @@
         obj.src="/getVerify?"+Math.random();
       },
       onSubmit(formName) {
-        this.register(this)
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.register(this)
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     },
   }

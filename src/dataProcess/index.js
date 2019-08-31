@@ -8,10 +8,10 @@ export default {
             objid.counter,
         ];
         var str=''
-        str = str+ items[0].toString(16);
-        str = str+ items[1].toString(16);
-        str = str+ items[2].toString(16);
-        str = str+ items[3].toString(16);
+        str = str+ items[0].toString(16).padStart(8,'0');
+        str = str+ items[1].toString(16).padStart(6,'0');
+        str = str+ items[2].toString(16).padStart(4,'0');
+        str = str+ items[3].toString(16).padStart(6,'0');
         var itemtype=''
         if(successResponse.data.flag==='true'){
             itemtype='movie'
@@ -103,5 +103,117 @@ export default {
             resArray.push(this.evaluationProcess(successResponse.data[i]));
         }
         return resArray;
+    },
+
+    groupDataProcess: function (originGroup) {
+        var objid=originGroup.groupId;
+        var items=[
+            objid.timestamp,
+            objid.machineIdentifier,
+            objid.processIdentifier,
+            objid.counter,
+        ];
+        var str=''
+        str = str+ items[0].toString(16).padStart(8,'0');
+        str = str+ items[1].toString(16).padStart(6,'0');
+        str = str+ items[2].toString(16).padStart(4,'0');
+        str = str+ items[3].toString(16).padStart(6,'0');
+        return {
+            type: 'group',
+            id: str,
+            name: originGroup.name,
+            tags: originGroup.tags,
+            introduction: originGroup.introduction,
+            createTime: originGroup.createTime,
+            leaderName: originGroup.leaderName,
+            adminsName: originGroup.adminsName,
+            membersName: originGroup.membersName,
+            heatDegree: originGroup.heatDegree,
+        }
+    },
+
+    groupListProcess: function(originGroups){
+        var resArray=[];
+        var len=originGroups.length;
+        for(var i=0;i<len;i++) {
+            resArray.push(this.groupDataProcess(originGroups[i]));
+            //alert(resArray[i].name);
+        }
+        return resArray;
+    },
+
+    topicDataProcess: function(originTopic) {
+        var objid=originTopic.postId;
+        var items=[
+            objid.timestamp,
+            objid.machineIdentifier,
+            objid.processIdentifier,
+            objid.counter,
+        ];
+        var str=''
+        str = str+ items[0].toString(16).padStart(8,'0');
+        str = str+ items[1].toString(16).padStart(6,'0');
+        str = str+ items[2].toString(16).padStart(4,'0');
+        str = str+ items[3].toString(16).padStart(6,'0');
+
+        var str1=originTopic.groupId;
+        var items1=[
+            objid.timestamp,
+            objid.machineIdentifier,
+            objid.processIdentifier,
+            objid.counter,
+        ];
+        var str1=''
+        str1 = str1+ items1[0].toString(16).padStart(8,'0');
+        str1 = str1+ items1[1].toString(16).padStart(6,'0');
+        str1 = str1+ items1[2].toString(16).padStart(4,'0');
+        str1 = str1+ items1[3].toString(16).padStart(6,'0');
+
+        return {
+            type: 'topic',
+            id: str,
+            groupId: str1,
+            title: originTopic.title,
+            username: originTopic.username,
+            imgAddr: originTopic.imgAddr,
+            mainBody: originTopic.mainBody,
+            time: originTopic.time,
+            likeNum: originTopic.likeNum,
+            collectNum: originTopic.collectNum,
+            isTop: originTopic.isTop,
+            isGreat: originTopic.isGreat,
+            discuss: originTopic.discuss,
+            replyTime: originTopic.replyTime,
+        }
+    },
+    topicListProcess: function(originTopics){
+        var len=originTopics.length;
+        var resArray=[];
+        for(var i=0;i<len;i++){
+            resArray.push(this.topicDataProcess(originTopics[i]));
+        }
+        return resArray;
+    },
+
+    allListProcess: function(origin){
+        var len=origin.length;
+        var resArray=[];
+        for(var i=0;i<len;i++){
+            if(origin[i].flag===1){
+                resArray.push(this.bookDataProcess({data:origin[i].result}))
+            }
+            else if(origin[i].flag===2||origin[i].flag===3){
+                resArray.push(this.movieDataProcess({data:origin[i].result}))
+            }
+            else if(origin[i].flag===4){
+                resArray.push(this.groupDataProcess(origin[i].result))
+            }
+            else{
+                resArray.push(this.topicDataProcess(origin[i].result))
+            }
+            //alert(resArray[i].type)
+        }
+        return resArray;
     }
+    
   }

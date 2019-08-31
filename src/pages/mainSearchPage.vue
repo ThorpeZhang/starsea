@@ -15,7 +15,7 @@
             <div class="sideBlock">
               <el-radio-group v-model="searchType" @change="changeSearch">
                 <div>
-                  <el-radio-button label="综合" disabled></el-radio-button>
+                  <el-radio-button label="综合"></el-radio-button>
                 </div>
                 <div>
                   <el-radio-button label="电影"></el-radio-button>
@@ -27,7 +27,7 @@
                   <el-radio-button label="图书"></el-radio-button>
                 </div>
                 <div>
-                  <el-radio-button label="小组" disabled></el-radio-button>
+                  <el-radio-button label="小组"></el-radio-button>
                 </div>
               </el-radio-group>
               <!--
@@ -47,7 +47,9 @@
           </el-col>
           <el-col :span="18" push="2">
             <div class="mainBlock" v-for="(result,o) in info.searchResults" :key="o">
-              <search-movie-detail :info="result"></search-movie-detail>
+              <group-intro v-if="result.type==='group'" :info="result"></group-intro>
+              <topic-intro v-else-if="result.type==='topic'" :info="result"></topic-intro>
+              <search-movie-detail v-else  :info="result"></search-movie-detail>
             </div>
           </el-col>
         </el-row>
@@ -83,11 +85,15 @@
 <script>
 import searchMovieDetail from "../components/searchMovieDetail.vue";
 import biggerLogoCard from "@/components/biggerLogoCard.vue";
+import groupIntro from "@/groupcomponents/groupIntro.vue";
+import topicIntro from "@/groupcomponents/topicIntro.vue";
 export default {
   name: "mainSearchPage",
   components: {
     "search-movie-detail": searchMovieDetail,
-    "bigger-logo-card": biggerLogoCard
+    "bigger-logo-card": biggerLogoCard,
+    "group-intro": groupIntro,
+    "topic-intro": topicIntro,
   },
   data() {
     return {
@@ -166,9 +172,43 @@ export default {
       })
       .catch(failResponse => {});
     },
+    searchAll: function(keyword){
+      this.$axios
+      .get("/searchAll", {
+        params: {
+          keyword: keyword
+        }
+      })
+      .then(successResponse => {
+        this.$set(
+          this.info,
+          "searchResults",
+          this.allListProcess(successResponse.data)
+        );
+        
+      })
+      .catch(failResponse => {});
+    },
+    searchGroup: function(keyword){
+      this.$axios
+      .get("/searchGroup", {
+        params: {
+          keyword: keyword
+        }
+      })
+      .then(successResponse => {
+        this.$set(
+          this.info,
+          "searchResults",
+          this.groupListProcess(successResponse.data)
+        );
+        
+      })
+      .catch(failResponse => {});
+    },
     changeSearch: function(val) {
       if(val==='综合'){
-        return;
+        this.searchAll(this.mainSearchInput)
       }
       else if(val==='电影'){
         this.searchMovie(this.mainSearchInput)
@@ -178,6 +218,9 @@ export default {
       }
       else if(val==='图书'){
         this.searchBook(this.mainSearchInput)
+      }
+      else if(val==='小组'){
+        this.searchGroup(this.mainSearchInput)
       }
     }
   }

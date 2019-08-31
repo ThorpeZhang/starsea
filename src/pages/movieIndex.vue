@@ -17,6 +17,8 @@
             <el-main>
               <page-card :items="info.movie1.slice(0,5)" type="movie"></page-card>
               <page-card :items="info.movie1.slice(5,10)" type="movie"></page-card>
+              <page-card :items="info.movie1.slice(10,15)" type="movie"></page-card>
+              <page-card :items="info.movie1.slice(15,20)" type="movie"></page-card>
             </el-main>
           </el-container>
 
@@ -33,6 +35,7 @@
             <el-main>
               <page-card :items="info.tv1.slice(0,5)" type="TV"></page-card>
               <page-card :items="info.tv1.slice(5,10)" type="TV"></page-card>
+              <page-card :items="info.tv1.slice(10,14)" type="TV"></page-card>
             </el-main>
           </el-container>
 
@@ -52,8 +55,11 @@
               </el-row>
             </el-header>
             <el-main>
-              <el-row v-for="(movie,o) in info.movie1" :key="o">
+              <el-row v-for="(movie,o) in info.movie1.slice(0,5)" :key="o">
                 <el-col :span="24"><bigger-logo-card :item="movie" type="movie"></bigger-logo-card></el-col>
+              </el-row>
+              <el-row v-for="(movie,o) in info.tv1.slice(0,4)" :key="o">
+                <el-col :span="24"><bigger-logo-card :item="movie" type="TV"></bigger-logo-card></el-col>
               </el-row>
             </el-main>
           </el-container>
@@ -84,7 +90,7 @@ export default {
     this.$axios
             .get('/showMovieIndex', {
                 params: {
-                    num: '10',
+                    num: '20',
                 }
             })
             .then(successResponse => {
@@ -96,7 +102,7 @@ export default {
     this.$axios
             .get('/showTVIndex', {
                 params: {
-                    num: '10',
+                    num: '14',
                 }
             })
             .then(successResponse => {
@@ -112,7 +118,7 @@ export default {
 #space{
   width: 100%;
   height: 60px;
-  background-color: #E9EEF3;
+  background-color: white;
 }
 #movieIndex {
     width: 100%;
@@ -131,21 +137,21 @@ h2{
 }
 .el-header, .el-footer {
     /*background-color: #B3C0D1;*/
-    background-color: #E9EEF3;
+    background-color: white;
     color: #333;
     text-align: left;
     line-height: 30px;
   }
   
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 200px;
   }
   
   .el-main {
-    background-color: #E9EEF3;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 160px;

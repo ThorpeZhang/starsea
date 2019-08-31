@@ -106,10 +106,14 @@ p {
   text-overflow: ellipsis;
 }
 .bigger-logo-card {
-  margin: 0 0 40px 0;
+  margin: 0 0 15px 0;
   padding: 0;
   height: 180px;
   width: 300px;
+  transition: 0.6s;
+}
+.bigger-logo-card:hover{
+  transform: scale(1.05);
 }
 .top-header {
   width: 100%;
@@ -147,10 +151,10 @@ h1 {
   width: 100%;
   float: right;
 
-  line-height: 25px;
-  font-size: 13px;
+  line-height: 20px;
+  font-size: 12px;
 
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
