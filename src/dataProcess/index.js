@@ -129,6 +129,7 @@ export default {
             adminsName: originGroup.adminsName,
             membersName: originGroup.membersName,
             heatDegree: originGroup.heatDegree,
+            imgAddr: 'http://114.115.131.124:8666/image/avatar/buaa.jpg',
         }
     },
 

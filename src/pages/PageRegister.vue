@@ -11,15 +11,6 @@
       <el-form-item label="验证密码" prop="checkpassword">
         <el-input type="password" placeholder="请再次输入密码" v-model="form.checkpassword"/>
       </el-form-item>
-      <el-form-item label="验证码" prop="checkcode">
-        <el-input type="tel" placeholder="请输入验证码" v-model="form.checkcode"/>
-        <div>
-          <a href="javascript:void(0);" title="点击更换验证码">
-            <img id="imgVerify" src="" alt="点击更换验证码" height="20" width="40%"
-              @click="getVerify(this);"/>
-          </a>
-        </div>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" v-on:click="onSubmit('form')">注册</el-button>
       </el-form-item>
@@ -42,6 +33,7 @@
   export default {
     name: "Register",
     data() {
+      /*
       var validateCode=(rule,value,callback) => {
         var flag=false;
           if(value===''){
@@ -67,7 +59,7 @@
             else{
               callback(new Error('验证失败'));
             }
-      };
+      };*/
       var validatePass2=(rule,value,callback) => {
           if(value===''){
             callback(new Error('请再次输入密码'));
@@ -112,7 +104,7 @@
           username: '',
           password: '',
           checkpassword: '',
-          checkcode: '',
+          //checkcode: '',
         },
 
         // 表单验证，需要在 el-form-item 元素中增加 prop 属性
@@ -126,9 +118,9 @@
           checkpassword: [
             {validator: validatePass2, trigger: 'blur'}
           ],
-          checkcode: [
+          /*checkcode: [
             {validator: validateCode, trigger: 'blur'}
-          ]
+          ]*/
         },
 
         // 对话框显示和隐藏

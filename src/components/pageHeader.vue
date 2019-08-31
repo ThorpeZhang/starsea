@@ -113,7 +113,7 @@ a .el-button{
 	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;*/
 }
 .el-menu-item:hover{
-	background-color: black;
+	background-color: black !important;
 }
 #header-bar {
 	z-index: 5;

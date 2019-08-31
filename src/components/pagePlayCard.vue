@@ -1,17 +1,19 @@
 <template>
   <el-carousel :interval="4000" type="card" height="350px" width="100px">
-    <el-carousel-item  v-for="(o, item) in 4" :key="o"><h1>广告位招租</h1>
+    <el-carousel-item  v-for="(o, item) in 5" :key="o">
       <!--<h3 class="medium">{{ item }}test</h3>-->
       <!--<img src="../assets/play1.jpg"/>-->
       <!--<a :href="link">-->
-        <!--
+  
       <a :href="'#/movieDetail/'+items[item].title">
       <el-image
         style="height: 100%"
         :src="items[item].imgsrc"
         ></el-image>
-      </a>-->
+      </a>
     </el-carousel-item>
+
+    
   </el-carousel>
 </template>
 
@@ -32,8 +34,16 @@ export default {
       link:"#/movieDetail",
     }
   },
-  props:{
-    items:Array
+  data(){
+    return {
+      items:[
+        {imgsrc: 'http://114.115.131.124:8666/image/poster/朝花夕誓.png',title:'朝花夕誓'},
+        {imgsrc: 'http://114.115.131.124:8666/image/poster/天气之子.png',title:'天气之子'},
+        {imgsrc: 'http://114.115.131.124:8666/image/poster/lover.png', title:'lover'},
+        {imgsrc: 'http://114.115.131.124:8666/image/poster/哪吒之魔童降世.png', title:'哪吒之魔童降世'},
+        {imgsrc: 'http://114.115.131.124:8666/image/poster/凉宫春日的消失.png', title: '凉宫春日的消失'},
+      ]
+    }
   }
 }
 </script>
