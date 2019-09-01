@@ -275,7 +275,7 @@ Vue.prototype.beInGroup=function(id,name,info){
   })
   .then(successResponse => {
     this.$set(info,"beInGroup",successResponse.data)
-    alert(successResponse.data)
+    //alert(successResponse.data)
   })
 }
 

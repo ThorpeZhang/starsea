@@ -8,7 +8,7 @@
             <div class="userInfo">
               <el-col span="10">
                 <div class="paper">
-                  <img :src="info.imgsrc" height="150px" />
+                  <img src="http://114.115.131.124:8666/image/avatar/buaa.jpg" height="150px" />
                 </div>
               </el-col>
               <el-col span="14">

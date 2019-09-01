@@ -7,7 +7,9 @@
             <group-intro></group-intro>
             <group-post></group-post>
         </el-main>
-        <el-aside width="15%"></el-aside>
+        <el-aside width="15%">
+            
+        </el-aside>
     </el-container>
 
 </div>

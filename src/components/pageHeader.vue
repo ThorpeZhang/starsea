@@ -17,7 +17,6 @@
 			-->
 
 			<el-menu-item v-for="(item,i) in navList"
-			id="pingfang"
 				:key="i"
 				:index="item.name">
 				<!--<a v-bind:href="'#'+[item.name]">{{item.navItem}}</a>-->
@@ -92,9 +91,6 @@ export default {
 @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
 */
 @import "../common/font/font.css";
-#pingfang{
-	font-family: pf;
-}
 a .el-button{
 	float:right;
 	align-self: center;

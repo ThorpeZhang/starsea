@@ -29,6 +29,9 @@
                 <div>
                   <el-radio-button label="小组"></el-radio-button>
                 </div>
+                <div>
+                  <el-radio-button label="贴子"></el-radio-button>
+                </div>
               </el-radio-group>
               <!--
               <div>
@@ -46,9 +49,14 @@
             </div>
           </el-col>
           <el-col :span="18" push="2">
+            <!--
+            <div class="mainBlock">
+              <group-topic></group-topic>
+            </div>
+            -->
             <div class="mainBlock" v-for="(result,o) in info.searchResults" :key="o">
-              <group-intro v-if="result.type==='group'" :info="result"></group-intro>
-              <topic-intro v-else-if="result.type==='topic'" :info="result"></topic-intro>
+              <group-detail v-if="result.type==='group'" :info="result"></group-detail>
+              <topic-detail v-else-if="result.type==='topic'" :info="result"></topic-detail>
               <search-movie-detail v-else  :info="result"></search-movie-detail>
             </div>
           </el-col>
@@ -87,6 +95,10 @@ import searchMovieDetail from "../components/searchMovieDetail.vue";
 import biggerLogoCard from "@/components/biggerLogoCard.vue";
 import groupIntro from "@/groupcomponents/groupIntro.vue";
 import topicIntro from "@/groupcomponents/topicIntro.vue";
+import groupPost from "@/groupcomponents/groupPost.vue";
+import searchGroupDetail from "@/groupcomponents/searchGroupDetail.vue"
+import searchTopicDetail from "@/groupcomponents/searchTopicDetail.vue"
+
 export default {
   name: "mainSearchPage",
   components: {
@@ -94,6 +106,9 @@ export default {
     "bigger-logo-card": biggerLogoCard,
     "group-intro": groupIntro,
     "topic-intro": topicIntro,
+    "group-post": groupPost,
+    "group-detail": searchGroupDetail,
+    "topic-detail": searchTopicDetail,
   },
   data() {
     return {
@@ -156,6 +171,22 @@ export default {
       })
       .catch(failResponse => {});
     },
+    searchPost: function(keyword){
+      this.$axios
+      .get("/searchPost", {
+        params: {
+          keyword: keyword
+        }
+      })
+      .then(successResponse => {
+        this.$set(
+          this.info,
+          "searchResults",
+          this.topicListProcess(successResponse.data)
+        );
+      })
+      .catch(failResponse => {});
+    },
     searchTV: function(keyword){
       this.$axios
       .get("/searchTV", {
@@ -185,7 +216,7 @@ export default {
           "searchResults",
           this.allListProcess(successResponse.data)
         );
-        
+
       })
       .catch(failResponse => {});
     },
@@ -202,7 +233,7 @@ export default {
           "searchResults",
           this.groupListProcess(successResponse.data)
         );
-        
+
       })
       .catch(failResponse => {});
     },
@@ -221,6 +252,9 @@ export default {
       }
       else if(val==='小组'){
         this.searchGroup(this.mainSearchInput)
+      }
+      else if(val==='贴子'){
+        this.searchPost(this.mainSearchInput)
       }
     }
   }

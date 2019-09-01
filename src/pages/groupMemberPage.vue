@@ -30,8 +30,71 @@
           </el-row>
         </el-col>
       </el-main>
+
       <el-aside width="35%">
         <div class="space"></div>
+        <el-container height="100%">
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="15" >
+                <h2>删除成员<hr/></h2>
+                <br>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <el-col :span="15">
+              <el-row>
+                <el-input
+                  placeholder="输入想要删除的组员的id"
+                  v-model="input"
+                  clearable="true">
+                  <el-button slot="append" type="primary" @click="open">确认</el-button>
+                </el-input>
+              </el-row>
+            </el-col>
+          </el-main>
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="15" >
+                <h2>删除管理员<hr/></h2>
+                <br>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <el-col :span="15">
+              <el-row>
+                <el-input
+                  placeholder="输入想要删除的管理员的id"
+                  v-model="input"
+                  clearable="true">
+                  <el-button slot="append" type="primary" @click="open">确认</el-button>
+                </el-input>
+              </el-row>
+            </el-col>
+          </el-main>
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="15" >
+                <h2>添加管理员<hr/></h2>
+                <br>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <el-col :span="15">
+              <el-row>
+                <el-input
+                  placeholder="输入想要添加的管理员的id"
+                  v-model="input"
+                  clearable="true">
+                  <el-button slot="append" type="primary" @click="open">确认</el-button>
+                </el-input>
+              </el-row>
+            </el-col>
+          </el-main>
+        </el-container>
       </el-aside>
     </el-container>
   </div>
@@ -164,8 +227,22 @@
             head: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
           },
         ],
+        input:'',
       }
     },
+    methods: {
+      open() {
+        this.$alert('确定执行此操作吗？', '再次确认', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `操作成功`
+            });
+          }
+        });
+      }
+    }
   }
 </script>
 

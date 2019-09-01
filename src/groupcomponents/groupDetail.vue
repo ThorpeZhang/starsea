@@ -57,6 +57,16 @@
               </el-col>
             </el-row>
 
+              <el-row>
+              <el-col span="20" offset="4">
+                <div class="title">
+                  <h1>置顶帖</h1>
+                </div>
+                <div>
+                  <top-post :info="info.topPosts[0]"></top-post>
+                </div>
+              </el-col>
+            </el-row>
             <el-row>
               <el-col span="20" offset="4">
                 <div class="title">
@@ -94,6 +104,36 @@
             </el-row>
           </el-main>
         </el-container>
+
+        <div class="space"></div>
+        <el-container height="100%">
+          <el-header height="40px">
+            <el-row>
+              <el-col :span="15" >
+                <h2>小组成员<hr/></h2>
+              </el-col>
+            </el-row>
+          </el-header>
+          <el-main>
+            <el-col :span="15">
+              <!--
+              <el-row>
+                <el-col span="6" v-for="(value,index) in 4" :key="value">
+                  <member-card :info="info.group.membersName[index]"></member-card>
+                </el-col>
+                <hr>
+              </el-row>
+              <el-row>
+                <el-col span="6" v-for="(value,index) in 4" :key="value">
+                  <member-card :info="info.group.membersName[index]"></member-card>
+                </el-col>
+                <hr>
+              </el-row>-->
+              <!--只有组长和管理员能点开这个链接-->
+              <el-link type="primary" href="#/groupMemberPage">管理成员</el-link>
+            </el-col>
+          </el-main>
+        </el-container>
       </el-aside>
     </el-container>
   </div>
@@ -109,7 +149,7 @@ export default {
   data() {
     return {
       info: {},
-      show: false
+      show: false,
     };
   },
   components: {
@@ -154,7 +194,7 @@ export default {
       });
 
     this.$axios
-      .get("showPostIndex", {
+      .get("/showPostIndex", {
         params: {
           num: 10
         }
@@ -166,6 +206,22 @@ export default {
           this.topicListProcess(successResponse.data)
         );
       });
+
+      this.$axios
+      .get("/showTopPostInGroup", {
+        params: {
+          groupId: id,
+        }
+      })
+      .then(successResponse => {
+        this.$set(
+          this.info,
+          "topPosts",
+          this.topicListProcess(successResponse.data)
+        );
+      });
+
+      
   },
   methods: {
     joinGroup: function() {
