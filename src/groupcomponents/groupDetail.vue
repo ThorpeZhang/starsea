@@ -116,19 +116,11 @@
           </el-header>
           <el-main>
             <el-col :span="15">
-              <!--
               <el-row>
-                <el-col span="6" v-for="(value,index) in 4" :key="value">
+                <el-col span="6" v-for="(value,index) in 2" :key="value">
                   <member-card :info="info.group.membersName[index]"></member-card>
                 </el-col>
-                <hr>
               </el-row>
-              <el-row>
-                <el-col span="6" v-for="(value,index) in 4" :key="value">
-                  <member-card :info="info.group.membersName[index]"></member-card>
-                </el-col>
-                <hr>
-              </el-row>-->
               <!--只有组长和管理员能点开这个链接-->
               <el-link type="primary" href="#/groupMemberPage">管理成员</el-link>
             </el-col>
@@ -144,6 +136,7 @@ import groupPost from "../groupcomponents/groupPost.vue";
 import groupIntro from "../groupcomponents/groupIntro.vue";
 import topicIntro from "../groupcomponents/topicIntro.vue";
 import writetopic from "@/components/writeTopic.vue";
+import membercard from '@/groupcomponents/memberCard.vue';
 export default {
   name: "groupDetail",
   data() {
@@ -156,7 +149,8 @@ export default {
     "group-post": groupPost,
     "group-intro": groupIntro,
     "topic-intro": topicIntro,
-    "write-topic": writetopic
+    "write-topic": writetopic,
+    "member-card": membercard
   },
   mounted() {
     //alert(this.isLogin())

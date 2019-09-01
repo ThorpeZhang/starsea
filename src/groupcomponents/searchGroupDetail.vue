@@ -41,6 +41,10 @@
 <style scoped>
  #searchGroupDetail {
    text-align: left;
+   transition: 0.6s;
+ }
+  #searchGroupDetail:hover {
+   transform: scale(1.02);
  }
  a{
    text-decoration: none;

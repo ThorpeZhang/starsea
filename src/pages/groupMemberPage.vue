@@ -8,7 +8,7 @@
             <div><h2>组长</h2></div>
             <div class="leader">
               <el-col span="3" v-for="(leader,index) in leaders" :key="leader">
-                <member-card :info="leaders[index]"></member-card>
+                <member-card :info="leaders[index].name"></member-card>
               </el-col>
             </div>
           </el-row>
@@ -16,7 +16,7 @@
             <div><h2>管理员</h2></div>
             <div class="leader">
               <el-col span="3" v-for="(admin,index) in admins" :key="admin">
-                <member-card :info="admins[index]"></member-card>
+                <member-card :info="admins[index].name"></member-card>
               </el-col>
             </div>
           </el-row>
@@ -24,7 +24,7 @@
             <div><h2>成员</h2></div>
             <div class="leader">
               <el-col span="3" v-for="(user,index) in users" :key="user">
-                <member-card :info="users[index]"></member-card>
+                <member-card :info="users[index].name"></member-card>
               </el-col>
             </div>
           </el-row>

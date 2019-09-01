@@ -4,7 +4,7 @@
       <el-col span="6">
         <el-avatar
           :size=45
-          :src="info.imgAddr"
+          src="http://114.115.131.124:8666/image/avatar/buaa.jpg"
           shape="square"
         ></el-avatar>
       </el-col>
@@ -17,7 +17,6 @@
         </div>
       </el-col>
     </el-row>
-    <hr>
   </div>
 </template>
 
@@ -34,6 +33,7 @@
   #groupIntro {
     text-align: left;
     position: relative;
+    margin: 20px 0 30px 0;
   }
   .member {
     font-size: 13px;

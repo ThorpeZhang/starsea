@@ -90,7 +90,6 @@ export default {
 /*
 @import url("//unpkg.com/element-ui@2.11.0/lib/theme-chalk/index.css");
 */
-@import "../common/font/font.css";
 a .el-button{
 	float:right;
 	align-self: center;

@@ -40,7 +40,11 @@
 <style scoped>
   #searchTopicDetail {
     text-align: left;
-  }
+    transition: 0.6s;
+ }
+  #searchTopicDetail:hover {
+   transform: scale(1.02);
+ }
   a{
     text-decoration: none;
     color: #74b9ff;

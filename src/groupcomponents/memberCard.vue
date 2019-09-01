@@ -3,12 +3,12 @@
     <div class="head">
       <el-avatar
         :size=65
-        :src="info.head"
+        src="http://114.115.131.124:8666/image/avatar/buaa.jpg"
         shape="square"
       ></el-avatar>
     </div>
     <div class="name">
-      <el-link type="primary">{{info.name}}</el-link>
+      <el-link type="primary" :href="'#/pageUser/'+info">{{info}}</el-link>
     </div>
   </div>
 </template>
@@ -18,10 +18,21 @@
       name: "memberCard",
       data() {
         return {
+          signal: ''
         }
       },
       props: {
-        info: Object,
+        info: String,
+      },
+      mounted(){
+        this.$axios.get('/showSignature',{
+          params:{
+            username: info
+          }
+        })
+        .then(successResponse=>{
+          this.signal=successResponse.data;
+        })
       }
   }
 </script>

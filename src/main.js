@@ -8,7 +8,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueAxios from 'vue-axios'
 import store from './store.js'
 import dataProcess from './dataProcess/index'
-import './common/font/font.css'
 
 var axios = require('axios')
 axios.defaults.baseURL = 'http://114.115.131.124:8666/api'

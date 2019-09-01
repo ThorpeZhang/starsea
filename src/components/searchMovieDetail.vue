@@ -51,6 +51,10 @@ h1{
 }
   #searchMovieDetail {
     text-align: left;
+    transition: 0.6s;
+  }
+   #searchMovieDetail:hover {
+    transform: scale(1.02);
   }
   .introduction {
     padding-top: 10px;
